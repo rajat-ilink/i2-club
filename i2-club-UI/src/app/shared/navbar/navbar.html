@@ -1,85 +1,96 @@
 <nav class="navbar">
-  <div class="logo">
-    <img
-        src="images/ilink-logo.png"
-        alt="iLink Digital"
-        class="logo-img"
-        routerLink="/home">
-  </div>
 
-  <div class="navbar-right">
+    <!-- Logo -->
+    <div class="logo" routerLink="/home">
+        <img src="images/ilink-logo.png" alt="iLink Digital" class="logo-img">
+    </div>
+
+    <!-- Center Navigation -->
     <ul class="nav-links">
-      <li>
-        <a
-            routerLink="/home"
-            routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true }">
-            Home
-        </a>
-        </li>
 
         <li>
-        <a
-            routerLink="/about"
-            routerLinkActive="active">
-            About
-        </a>
-        </li>
-
-        <li>
-        <a
-            routerLink="/platform"
-            routerLinkActive="active">
-            Platforms
-        </a>
+            <a routerLink="/about" routerLinkActive="active">
+                About Us
+            </a>
         </li>
 
         <li class="dropdown">
             <a (click)="toggleEvents()" class="dropdown-trigger">
-            Events <span class="caret" [class.open]="eventsOpen">▾</span>
+                Events
+                <span class="caret" [class.open]="eventsOpen">
+                    ▾
+                </span>
             </a>
 
             @if (eventsOpen) {
             <ul class="dropdown-menu">
+
                 @for (event of sampleEvents; track event.name) {
                 <li>
                     <a href="#" class="dropdown-item">
-                    <span class="event-name">{{ event.name }}</span>
-                    <span class="event-date">{{ event.date }}</span>
+                        <span class="event-name">
+                            {{ event.name }}
+                        </span>
+
+                        <span class="event-date">
+                            {{ event.date }}
+                        </span>
                     </a>
                 </li>
                 }
+
                 <li class="dropdown-footer">
-                <a
-                    routerLink="/events"
-                    routerLinkActive="active"
-                    (click)="closeEvents()">
-                    View all events →
-                </a>
+                    <a routerLink="/events" (click)="closeEvents()">
+                        View all events →
+                    </a>
                 </li>
+
             </ul>
             }
         </li>
 
         <li>
-        <a
-            routerLink="/links"
-            routerLinkActive="active">
-            Links
-        </a>
+            <a routerLink="/ai-agents" routerLinkActive="active">
+                AI Agents We Have
+            </a>
         </li>
 
         <li>
-        <a
-            routerLink="/contact"
-            routerLinkActive="active">
-            Contact
-        </a>
+            <a routerLink="/your-ideas" routerLinkActive="active">
+                Your Ideas
+            </a>
         </li>
+
     </ul>
 
-    <button class="logout-btn" (click)="logout()">
-      Logout
-    </button>
-  </div>
+
+    <!-- Login -->
+    <div class="login-dropdown">
+
+        <button class="login-btn" (click)="toggleLoginDropdown()">
+
+            Login / Sign up
+
+            <span class="login-caret" [class.open]="loginDropdownOpen">
+                ▾
+            </span>
+
+        </button>
+
+        @if (loginDropdownOpen) {
+        <div class="login-menu">
+
+            <a routerLink="/login" (click)="closeLoginDropdown()">
+                iLink Employee
+            </a>
+
+            <a routerLink="/guest-login" (click)="closeLoginDropdown()">
+                Guest
+            </a>
+
+        </div>
+        }
+
+    </div>
+
 </nav>
