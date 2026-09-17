@@ -26,8 +26,8 @@
             <ul class="dropdown-menu">
 
                 @for (event of sampleEvents; track event.name) {
-                <li>
-                    <a href="#" class="dropdown-item">
+                <li class="dropdown-event">
+                    <div class="dropdown-item">
                         <span class="event-name">
                             {{ event.name }}
                         </span>
@@ -35,7 +35,7 @@
                         <span class="event-date">
                             {{ event.date }}
                         </span>
-                    </a>
+                    </div>
                 </li>
                 }
 
