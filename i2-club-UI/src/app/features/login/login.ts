@@ -12,6 +12,8 @@ import { AuthService } from '../../core/services/auth';
 })
 export class LoginComponent {
 
+  firstName = '';
+  lastName = '';
   email = '';
   password = '';
   error = '';
@@ -19,11 +21,24 @@ export class LoginComponent {
   constructor(
     private authService: AuthService,
     private router: Router
-  ) {}
+  ) { }
 
-  login() {
+  login(): void {
+
+    // Basic validation
+    if (
+      !this.firstName.trim() ||
+      !this.lastName.trim() ||
+      !this.email.trim() ||
+      !this.password.trim()
+    ) {
+      this.error = 'Please enter all fields.';
+      return;
+    }
 
     const success = this.authService.login(
+      this.firstName,
+      this.lastName,
       this.email,
       this.password
     );

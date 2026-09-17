@@ -9,57 +9,67 @@ import { LinksComponent } from './features/links/links';
 import { ContactComponent } from './features/contact/contact';
 
 import { authGuard } from './core/guards/auth-guard';
-import { NavbarLayoutComponent } from './layouts/navbar-layout/navbar-layout';
-import { FooterComponent } from './shared/footer/footer';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout';
 
 export const routes: Routes = [
 
+  // Open application directly on Home
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
 
+  // Login page should be accessible without authentication
   {
     path: 'login',
     component: LoginComponent
-    },
+  },
 
-    {
+  // Main application layout
+  {
     path: '',
     component: MainLayoutComponent,
-    canActivate: [authGuard],
     children: [
-        {
+
+      // Home is PUBLIC
+      {
         path: 'home',
         component: HomeComponent
-        },
-        {
-        path: 'about',
-        component: AboutComponent
-        },
-        {
-        path: 'platform',
-        component: PlatformComponent
-        },
-        {
-        path: 'events',
-        component: EventsComponent
-        },
-        {
-        path: 'links',
-        component: LinksComponent
-        },
-        {
-        path: 'contact',
-        component: ContactComponent
-        }
-    ]
-    },
+      },
 
+      // Other pages require login
+      {
+        path: 'about',
+        component: AboutComponent,
+        canActivate: [authGuard]
+      },
+      {
+        path: 'platform',
+        component: PlatformComponent,
+        canActivate: [authGuard]
+      },
+      {
+        path: 'events',
+        component: EventsComponent,
+        canActivate: [authGuard]
+      },
+      {
+        path: 'links',
+        component: LinksComponent,
+        canActivate: [authGuard]
+      },
+      {
+        path: 'contact',
+        component: ContactComponent,
+        canActivate: [authGuard]
+      }
+    ]
+  },
+
+  // Unknown route → Home
   {
     path: '**',
-    redirectTo: 'login'
+    redirectTo: 'home'
   }
 ];

@@ -67,28 +67,50 @@
     <!-- Login -->
     <div class="login-dropdown">
 
-        <button class="login-btn" (click)="toggleLoginDropdown()">
+        @if (isLoggedIn) {
 
-            Login / Sign up
-
-            <span class="login-caret" [class.open]="loginDropdownOpen">
-                ▾
-            </span>
-
+        <button class="logged-in-user" (click)="toggleLoginDropdown()">
+            {{ firstName }}
+            <span class="caret" [class.open]="loginDropdownOpen">▾</span>
         </button>
 
         @if (loginDropdownOpen) {
-        <div class="login-menu">
+        <ul class="dropdown-menu login-menu">
 
-            <a routerLink="/login" (click)="closeLoginDropdown()">
-                iLink Employee
-            </a>
+            <li class="login-menu-item">
+                <button type="button" class="signout-btn" (click)="logout()">
+                    Sign out
+                </button>
+            </li>
 
-            <a routerLink="/guest-login" (click)="closeLoginDropdown()">
-                Guest
-            </a>
+        </ul>
+        }
 
-        </div>
+        } @else {
+
+        <button class="login-btn" (click)="toggleLoginDropdown()">
+            Login / Sign up
+            <span class="caret" [class.open]="loginDropdownOpen">▾</span>
+        </button>
+
+        @if (loginDropdownOpen) {
+        <ul class="dropdown-menu login-menu">
+
+            <li>
+                <a routerLink="/login" (click)="closeLoginDropdown()">
+                    iLink Employee
+                </a>
+            </li>
+
+            <li>
+                <a routerLink="/login" (click)="closeLoginDropdown()">
+                    Guest
+                </a>
+            </li>
+
+        </ul>
+        }
+
         }
 
     </div>

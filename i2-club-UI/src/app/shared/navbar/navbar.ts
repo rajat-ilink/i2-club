@@ -15,10 +15,14 @@ export class NavbarComponent {
     private authService: AuthService,
     private router: Router,
     private elementRef: ElementRef
-  ) { }
+  ) {
+    this.checkLoginStatus();
+  }
 
   eventsOpen = false;
   loginDropdownOpen = false;
+  isLoggedIn = false;
+  firstName = '';
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent): void {
@@ -37,7 +41,6 @@ export class NavbarComponent {
     { name: 'Developer Hackathon', date: 'Sep 10' }
   ];
 
-
   // Events dropdown
   toggleEvents(): void {
     this.eventsOpen = !this.eventsOpen;
@@ -52,7 +55,16 @@ export class NavbarComponent {
   }
 
 
-  // Login / Sign up dropdown
+  checkLoginStatus(): void {
+    this.isLoggedIn = this.authService.isLoggedIn();
+
+    if (this.isLoggedIn) {
+      this.firstName = this.authService.getFirstName();
+    } else {
+      this.firstName = '';
+    }
+  }
+
   toggleLoginDropdown(): void {
     this.loginDropdownOpen = !this.loginDropdownOpen;
 
@@ -65,9 +77,14 @@ export class NavbarComponent {
     this.loginDropdownOpen = false;
   }
 
-
   logout(): void {
     this.authService.logout();
-    this.router.navigate(['/login']);
+
+    this.isLoggedIn = false;
+    this.firstName = '';
+    this.loginDropdownOpen = false;
+
+    // Stay on Home after sign out
+    this.router.navigate(['/home']);
   }
 }
