@@ -31,6 +31,58 @@ interface HackathonEvent {
   gallery: string[];
   hackathonJourney?: HackathonJourney[];
   hackathonImpact?: HackathonImpact[];
+  modalContent?: EventModalContent;
+}
+
+interface EventModalSection {
+  heading?: string;
+  paragraphs?: string[];
+  listItems?: string[];
+}
+
+interface EventModalStat {
+  value: string;
+  label: string;
+}
+
+interface EventModalGalleryItem {
+  image: string;
+  alt?: string;
+}
+
+interface EventJourneyItem {
+  number: string;
+  location: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  highlights: string[];
+}
+
+interface EventModalContent {
+  label?: string;
+
+  title: string;
+
+  date?: string;
+  location?: string;
+
+  stats?: EventModalStat[];
+
+  intro?: string[];
+
+  sections?: EventModalSection[];
+
+  journey?: EventJourneyItem[];
+
+  impact?: EventModalStat[];
+
+  closingTitle?: string;
+  closingText?: string;
+  closingWords?: string[];
+  closingCta?: string;
+
+  gallery?: EventModalGalleryItem[];
 }
 
 @Component({
@@ -190,6 +242,91 @@ export class HomeComponent {
           ]
         }
       ],
+      modalContent: {
+        label: 'USER GROUP MEETUP',
+
+        title: 'AI + Cybersecurity User Group Meetup',
+
+        date: 'July 26',
+
+        location: 'iLink Digital, Chennai',
+
+        stats: [
+          {
+            value: '55+',
+            label: 'Attendees'
+          }
+        ],
+
+        intro: [
+          'Two rapidly evolving worlds - AI & Cybersecurity.',
+          'iLink Digital’s Chennai office hosted an engaging AI + Cybersecurity User Group Community Meetup, bringing together industry professionals, technology enthusiasts, and internal experts to explore how Generative AI is reshaping the cybersecurity landscape.',
+          'The session opened by Mr. Thangaraj Petchiappan, CTO – SIMS, iLink Digital, followed by a keynote from Mr. Ananth Kumar M Subbarao, CISO and cybersecurity advisor with 30+ years of experience.'
+        ],
+
+        sections: [
+          {
+            heading: 'The Role of Generative AI in Enhancing & Exploiting Cybersecurity',
+
+            listItems: [
+              'The evolution of AI in cybersecurity',
+              'Practical Generative AI use cases',
+              'Offensive & defensive applications of AI',
+              'Emerging cybersecurity threats',
+              'Governance, privacy & responsible AI',
+              'Sector-specific applications and case studies'
+            ]
+          },
+
+          {
+            heading: 'Interactive Q&A',
+
+            paragraphs: [
+              'An interactive Q&A session followed, moderated by Mr. Arun Kumar Prabhakaran, Vice President – Delivery, iLink Digital.'
+            ]
+          },
+
+          {
+            heading: 'From Conversation to Possibility',
+
+            paragraphs: [
+              'The meetup moved beyond discussion into practical possibilities with a BEAK demonstration, potential pilot collaborations and follow-ups, future community events and career opportunities, and opportunities for talent engagement and community building.'
+            ]
+          }
+        ],
+
+        closingTitle: 'Explore. Connect. Innovate.',
+
+        closingText:
+          'Stay tuned for more i² CLUB community meetups where ideas, technology and people come together.',
+
+        gallery: [
+          {
+            image: 'images/user-group/user-group-01.jpg',
+            alt: 'AI and Cybersecurity User Group Meetup'
+          },
+          {
+            image: 'images/user-group/user-group-02.jpg',
+            alt: 'AI and Cybersecurity User Group Meetup'
+          },
+          {
+            image: 'images/user-group/user-group-03.jpg',
+            alt: 'AI and Cybersecurity User Group Meetup'
+          },
+          {
+            image: 'images/user-group/user-group-04.jpg',
+            alt: 'AI and Cybersecurity User Group Meetup'
+          },
+          {
+            image: 'images/user-group/user-group-05.jpg',
+            alt: 'AI and Cybersecurity User Group Meetup'
+          },
+          {
+            image: 'images/user-group/user-group-06.jpg',
+            alt: 'AI and Cybersecurity User Group Meetup'
+          }
+        ]
+      },
       gallery: []
     },
     // {

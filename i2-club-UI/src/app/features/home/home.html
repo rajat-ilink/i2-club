@@ -608,117 +608,312 @@
       </div>
 
       } @else {
+      <div class="event-modal">
 
-      <!-- =====================================================
-            EXISTING MODAL FOR OTHER EVENTS
-            ===================================================== -->
+        <!-- Header -->
+        <div class="event-modal-header">
 
-      <div class="modal-header">
+          @if (selectedEvent.modalContent?.label) {
+          <div class="event-modal-label">
+            {{ selectedEvent.modalContent?.label }}
+          </div>
+          }
 
-        <span class="modal-icon">
-          {{ selectedEvent.icon }}
-        </span>
+          <h2>{{ selectedEvent.modalContent?.title || selectedEvent.popupTitle }}</h2>
 
-        <div>
+          <div class="event-modal-meta">
 
-          <h2>
-            {{ selectedEvent.popupTitle }}
-          </h2>
+            @if (selectedEvent.modalContent?.date) {
+            <span>
+              <span class="event-modal-meta-icon">◷</span>
+              {{ selectedEvent.modalContent?.date }}
+            </span>
+            }
 
-          <p class="modal-date">
-            {{ selectedEvent.date }}
-          </p>
+            @if (selectedEvent.modalContent?.location) {
+            <span>
+              <span class="event-modal-meta-icon">⌖</span>
+              {{ selectedEvent.modalContent?.location }}
+            </span>
+            }
 
+          </div>
         </div>
 
-      </div>
 
+        <!-- Body -->
+        <div class="event-modal-body">
 
-      <div class="modal-body">
-
-        @for (
-        section of selectedEvent.sections;
-        track section.heading
-        ) {
-
-        <div class="modal-section">
-
-          @if (section.heading) {
-          <h3>{{ section.heading }}</h3>
-          }
-
-          @for (
-          para of section.paragraphs;
-          track para
-          ) {
-          <p>{{ para }}</p>
-          }
-
-          @if (
-          section.listItems &&
-          section.listItems.length
-          ) {
-
-          <ul class="modal-list">
+          <!-- Stats -->
+          @if (selectedEvent.modalContent?.stats?.length) {
+          <div class="event-modal-stats">
 
             @for (
-            item of section.listItems;
-            track item
+            stat of selectedEvent.modalContent?.stats;
+            track stat.label
             ) {
+            <div class="event-modal-stat">
+              <div class="event-modal-stat-value">
+                {{ stat.value }}
+              </div>
 
-            <li>{{ item }}</li>
+              <div class="event-modal-stat-label">
+                {{ stat.label }}
+              </div>
+            </div>
+            }
+
+          </div>
+          }
+
+
+          <!-- Intro -->
+          @if (selectedEvent.modalContent?.intro?.length) {
+          <div class="event-modal-intro">
+
+            @for (
+            paragraph of selectedEvent.modalContent?.intro;
+            track paragraph
+            ) {
+            <p>{{ paragraph }}</p>
+            }
+
+          </div>
+          }
+
+
+          <!-- Content Sections -->
+          @if (selectedEvent.modalContent?.sections?.length) {
+
+          @for (
+          section of selectedEvent.modalContent?.sections;
+          track section.heading
+          ) {
+
+          <div class="event-modal-section">
+
+            @if (section.heading) {
+            <h3>{{ section.heading }}</h3>
+            }
+
+
+            @if (section.paragraphs?.length) {
+
+            @for (
+            paragraph of section.paragraphs;
+            track paragraph
+            ) {
+            <p>{{ paragraph }}</p>
+            }
 
             }
 
-          </ul>
+
+            @if (section.listItems?.length) {
+
+            <ul class="event-modal-list">
+
+              @for (
+              item of section.listItems;
+              track item
+              ) {
+              <li>
+                <span class="event-modal-list-dot"></span>
+                <span>{{ item }}</span>
+              </li>
+              }
+
+            </ul>
+
+            }
+
+          </div>
+          }
 
           }
 
-        </div>
 
-        }
+          <!-- Optional Hackathon Journey -->
+          @if (selectedEvent.modalContent?.journey?.length) {
+
+          <div class="event-modal-section event-journey-section">
+
+            <h3>Our Journey</h3>
+
+            <div class="event-journey">
+
+              @for (
+              item of selectedEvent.modalContent?.journey;
+              track item.number
+              ) {
+
+              <div class="event-journey-item">
+
+                <div class="event-journey-number">
+                  {{ item.number }}
+                </div>
+
+                <div class="event-journey-content">
+
+                  <div class="event-journey-location">
+                    {{ item.location }}
+                  </div>
+
+                  <h4>{{ item.title }}</h4>
+
+                  <div class="event-journey-subtitle">
+                    {{ item.subtitle }}
+                  </div>
+
+                  <p>{{ item.description }}</p>
+
+                  @if (item.highlights?.length) {
+                  <ul>
+                    @for (
+                    highlight of item.highlights;
+                    track highlight
+                    ) {
+                    <li>{{ highlight }}</li>
+                    }
+                  </ul>
+                  }
+
+                </div>
+
+              </div>
+
+              }
+
+            </div>
+          </div>
+
+          }
 
 
-        @if (selectedEvent.gallery.length) {
+          <!-- Optional Impact -->
+          @if (selectedEvent.modalContent?.impact?.length) {
 
-        <div class="modal-section">
+          <div class="event-modal-section event-impact-section">
 
-          <h3>Gallery</h3>
+            <h3>Impact</h3>
 
-          <div class="modal-gallery">
+            <div class="event-impact-grid">
 
-            @for (
-            photo of selectedEvent.gallery;
-            track photo
-            ) {
+              @for (
+              stat of selectedEvent.modalContent?.impact;
+              track stat.label
+              ) {
 
-            <div class="gallery-item">
-              <img [src]="photo" alt="Event photo">
+              <div class="event-impact-item">
+
+                <div class="event-impact-value">
+                  {{ stat.value }}
+                </div>
+
+                <div class="event-impact-label">
+                  {{ stat.label }}
+                </div>
+
+              </div>
+
+              }
+
+            </div>
+          </div>
+
+          }
+
+
+          <!-- Closing -->
+          @if (
+          selectedEvent.modalContent?.closingTitle ||
+          selectedEvent.modalContent?.closingText
+          ) {
+
+          <div class="event-modal-closing">
+
+            @if (selectedEvent.modalContent?.closingTitle) {
+            <h3>
+              {{ selectedEvent.modalContent?.closingTitle }}
+            </h3>
+            }
+
+            @if (selectedEvent.modalContent?.closingText) {
+            <p>
+              {{ selectedEvent.modalContent?.closingText }}
+            </p>
+            }
+
+            @if (selectedEvent.modalContent?.closingWords?.length) {
+
+            <div class="event-modal-closing-words">
+
+              @for (
+              word of selectedEvent.modalContent?.closingWords;
+              track word
+              ) {
+              <span>{{ word }}</span>
+              }
+
             </div>
 
             }
 
           </div>
 
+          }
+
+
+          <!-- Gallery -->
+          @if (selectedEvent.modalContent?.gallery?.length) {
+
+          <div class="event-modal-gallery-section">
+
+            <div class="event-modal-gallery-heading">
+              <span class="event-modal-gallery-line"></span>
+
+              <div>
+                <span class="event-modal-gallery-label">
+                  MOMENTS FROM THE EVENT
+                </span>
+
+                <h3>Event Highlights</h3>
+              </div>
+            </div>
+
+
+            <div class="event-modal-gallery">
+
+              @for (
+              photo of selectedEvent.modalContent?.gallery;
+              track photo.image
+              ) {
+
+              <div class="event-modal-gallery-item">
+
+                <img [src]="photo.image" [alt]="photo.alt || 'Event photo'">
+
+              </div>
+
+              }
+
+            </div>
+
+          </div>
+
+          }
+
         </div>
 
-        }
+
+        <!-- Footer -->
+        <div class="event-modal-footer">
+          <button type="button" class="event-modal-close-btn" (click)="closeEvent()">
+            Close
+          </button>
+        </div>
 
       </div>
-
-
-      <div class="modal-footer">
-
-        <button class="btn btn-primary" (click)="joinNow()">
-          Join Now
-        </button>
-
-        <button class="btn btn-outline" (click)="closeEvent()">
-          Close
-        </button>
-
-      </div>
-
       }
 
     </div>

@@ -10,6 +10,7 @@ import { ContactComponent } from './features/contact/contact';
 
 import { authGuard } from './core/guards/auth-guard';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout';
+import { AiAgents } from './features/ai-agents/ai-agents';
 
 export const routes: Routes = [
 
@@ -42,27 +43,26 @@ export const routes: Routes = [
       {
         path: 'about',
         component: AboutComponent,
-        canActivate: [authGuard]
       },
       {
         path: 'platform',
         component: PlatformComponent,
-        canActivate: [authGuard]
       },
       {
         path: 'events',
         component: EventsComponent,
-        canActivate: [authGuard]
+      },
+      {
+        path: 'ai-agents',
+        component: AiAgents,
       },
       {
         path: 'links',
         component: LinksComponent,
-        canActivate: [authGuard]
       },
       {
         path: 'contact',
         component: ContactComponent,
-        canActivate: [authGuard]
       }
     ]
   },
