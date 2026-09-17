@@ -1,0 +1,25 @@
+{
+"hackathonEvents": [
+    {
+      "title": "CodeStorm 2026",
+      "date": "Jul 18–19",
+      "tag": "24-Hour Hackathon",
+      "description": "Build AI-powered solutions for real enterprise problems. Open to all teams, mentors on-site.",
+      "icon": "⚡"
+    },
+    {
+      "title": "AgentX Challenge",
+      "date": "Aug 05–06",
+      "tag": "Multi-Agent Systems",
+      "description": "Design autonomous agent workflows using iGentic.",
+      "icon": "🤖"
+    },
+    {
+      "title": "BEAK Builders Sprint",
+      "date": "Aug 22",
+      "tag": "Low-Code AI",
+      "description": "Rapid prototype AI solutions.",
+      "icon": "🚀"
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+<nav class="navbar">
+  <div class="logo">
+    <img
+        src="images/ilink-logo.png"
+        alt="iLink Digital"
+        class="logo-img"
+        routerLink="/home">
+  </div>
+
+  <div class="navbar-right">
+    <ul class="nav-links">
+      <li>
+        <a
+            routerLink="/home"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }">
+            Home
+        </a>
+        </li>
+
+        <li>
+        <a
+            routerLink="/about"
+            routerLinkActive="active">
+            About
+        </a>
+        </li>
+
+        <li>
+        <a
+            routerLink="/platform"
+            routerLinkActive="active">
+            Platforms
+        </a>
+        </li>
+
+        <li class="dropdown">
+            <a (click)="toggleEvents()" class="dropdown-trigger">
+            Events <span class="caret" [class.open]="eventsOpen">▾</span>
+            </a>
+
+            @if (eventsOpen) {
+            <ul class="dropdown-menu">
+                @for (event of sampleEvents; track event.name) {
+                <li>
+                    <a href="#" class="dropdown-item">
+                    <span class="event-name">{{ event.name }}</span>
+                    <span class="event-date">{{ event.date }}</span>
+                    </a>
+                </li>
+                }
+                <li class="dropdown-footer">
+                <a
+                    routerLink="/events"
+                    routerLinkActive="active"
+                    (click)="closeEvents()">
+                    View all events →
+                </a>
+                </li>
+            </ul>
+            }
+        </li>
+
+        <li>
+        <a
+            routerLink="/links"
+            routerLinkActive="active">
+            Links
+        </a>
+        </li>
+
+        <li>
+        <a
+            routerLink="/contact"
+            routerLinkActive="active">
+            Contact
+        </a>
+        </li>
+    </ul>
+
+    <button class="logout-btn" (click)="logout()">
+      Logout
+    </button>
+  </div>
+</nav>
