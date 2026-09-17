@@ -6,6 +6,20 @@ interface InfoSection {
   listItems?: string[];
 }
 
+interface HackathonJourney {
+  number: string;
+  location: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  highlights: string[];
+}
+
+interface HackathonImpact {
+  value: string;
+  label: string;
+}
+
 interface HackathonEvent {
   title: string;
   date: string;
@@ -15,6 +29,8 @@ interface HackathonEvent {
   popupTitle: string;
   sections: InfoSection[];
   gallery: string[];
+  hackathonJourney?: HackathonJourney[];
+  hackathonImpact?: HackathonImpact[];
 }
 
 @Component({
@@ -36,52 +52,127 @@ export class HomeComponent {
       tag: '24-Hour Hackathon',
       description: 'Build AI-powered solutions for real enterprise problems. Open to all teams, mentors on-site.',
       icon: 'trophy',
-      popupTitle: 'Our Hackathons',
-      sections: [
+      popupTitle: 'Our AI Hackathon Journey',
+
+      sections: [],
+
+      gallery: [],
+
+      hackathonJourney: [
+
         {
-          heading: 'Our Hackathons',
-          paragraphs: [
-            "Our AI Hackathons provide a platform for students across India to gain hands-on experience in building real-world AI agents. Participants work on practical business challenges under the guidance of industry experts using our in-house AI platforms, iGentic and BEAK.",
-            "The hackathons are designed to encourage innovation, strengthen AI development skills, and give students exposure to real-world problem-solving through collaborative learning. Outstanding participants are recognized with exciting cash prizes and the opportunity to earn a paid internship with us."
+          number: '01',
+          location: 'Chennai',
+          title: 'BEAK Hackathon',
+          subtitle: 'Karpagam College of Engineering',
+          description:
+            'Our first student hackathon in Chennai brought together 65 students from Karpagam College of Engineering. The event marked the beginning of our journey to take AI innovation beyond ideas and into practical solutions.',
+          highlights: [
+            '30+ AI agents ideated',
+            '20 finalists',
+            'Top 3 agents selected',
+            '1 student offered a full-time opportunity'
           ]
         },
+
         {
-          heading: 'Our Journey So Far',
-          paragraphs: [
-            'We have successfully conducted 5 AI Hackathons across India:'
-          ],
-          listItems: [
-            '3 BEAK Hackathons',
-            '2 iGentic Hackathons'
+          number: '02',
+          location: 'Pune & Chennai',
+          title: 'iGentic Internal Hackathon',
+          subtitle: 'Employee Innovation',
+          description:
+            'Following the success of the first hackathon, we brought together employees from Pune and Chennai through a virtual iGentic-powered hackathon. Employees explored innovative ways to automate their everyday tasks and identify opportunities for AI transformation.',
+          highlights: [
+            '30+ employees participated',
+            '7 AI agents ideated',
+            '3 agents moved into production',
+            'Agents are currently being used within the organisation'
           ]
         },
+
         {
-          heading: '',
-          paragraphs: [
-            'These events have been hosted in Chennai, Trichy, and Pune, engaging 300+ students who have worked on innovative AI solutions.',
-            'Our 6th AI Hackathon is currently underway in Coimbatore, with 285+ students participating and building AI-powered solutions under the mentorship of our experts.'
+          number: '03',
+          location: 'Pune',
+          title: 'iGentic Internal Hackathon',
+          subtitle: 'Employee-Led AI Transformation',
+          description:
+            'The third hackathon continued our employee-led AI transformation journey in Pune, focusing on making everyday tasks simpler and more efficient through AI agents.',
+          highlights: [
+            '20+ AI agents ideated',
+            '5 agents moved towards production',
+            'Employee-driven solutions for real-world use cases'
           ]
         },
+
         {
-          heading: 'Be a Part of the Journey',
-          paragraphs: [
-            "Whether you're a student, professional, or AI enthusiast, we'd love to have you involved!"
-          ],
-          listItems: [
-            'Join us as a Volunteer',
-            'Join us as a Participant',
-            'Share AI Use Case Ideas',
-            'Become a Mentor'
+          number: '04',
+          location: 'Trichy',
+          title: 'Saranathan College of Engineering',
+          subtitle: 'Student Hackathon',
+          description:
+            'Students from Saranathan College of Engineering brought tremendous enthusiasm and creativity to our Trichy hackathon.',
+          highlights: [
+            '70+ students participated',
+            '20 finalists',
+            '20 AI agents ideated',
+            '5 agents considered for production',
+            '3 students selected for internships',
+            'Selected interns are currently working with the SIMS team'
+          ]
+        },
+
+        {
+          number: '05',
+          location: 'Pune',
+          title: 'DY Patil College',
+          subtitle: 'SIMS & BEAK Hackathon',
+          description:
+            'Our fifth hackathon brought the SIMS and BEAK platforms together at DY Patil College, giving students an opportunity to explore AI and agentic solutions.',
+          highlights: [
+            '100+ students participated',
+            '20+ AI agents ideated',
+            'Students explored AI-powered solutions to real-world challenges'
+          ]
+        },
+
+        {
+          number: '06',
+          location: 'Coimbatore',
+          title: 'KovAI Hackathon',
+          subtitle: 'Powered by iGentic & BEAK',
+          description:
+            'Our sixth and largest hackathon brought the AI innovation journey to Coimbatore. With 300+ students participating, KovAI became a platform for students to experiment, collaborate and build AI agents around real-world use cases.',
+          highlights: [
+            '300+ students participated',
+            '30+ AI agents ideated',
+            '20 AI agents moving towards production',
+            '6 students offered internship opportunities'
           ]
         }
+
       ],
-      gallery: [
-        'https://images.unsplash.com/photo-1518770660439-4636190af475?w=500&q=80',
-        'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=500&q=80',
-        'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=500&q=80',
-        'https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=500&q=80',
-        'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&q=80',
-        'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=500&q=80'
+
+      hackathonImpact: [
+        {
+          value: '800+',
+          label: 'Participants'
+        },
+        {
+          value: '100+',
+          label: 'AI Agents Ideated'
+        },
+        {
+          value: '20+',
+          label: 'Agents Moving Towards Production'
+        },
+        {
+          value: '10+',
+          label: 'Internship & Full-Time Opportunities'
+        },
+        {
+          value: '6',
+          label: 'Hackathons Completed'
+        }
       ]
     },
     {

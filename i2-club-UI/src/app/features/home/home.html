@@ -362,53 +362,315 @@
     <div class="modal-card" (click)="$event.stopPropagation()">
 
       <button class="modal-close" (click)="closeEvent()" aria-label="Close">✕</button>
+      @if (selectedEvent.title === 'Hackathon') {
 
-      <div class="modal-header">
-        <span class="modal-icon">{{ selectedEvent.icon }}</span>
-        <div>
-          <!-- <span class="modal-tag">{{ selectedEvent.tag }}</span> -->
-          <h2>{{ selectedEvent.popupTitle }}</h2>
-          <p class="modal-date">{{ selectedEvent.date }}</p>
+      <!-- =====================================================
+            AI HACKATHON JOURNEY MODAL
+            ===================================================== -->
+
+      <div class="hackathon-modal">
+
+        <!-- Hero -->
+        <div class="hackathon-modal-hero">
+
+          <div class="hackathon-modal-label">
+            <span></span>
+            AI HACKATHON JOURNEY
+          </div>
+
+          <h2>
+            Our AI Hackathon Journey
+          </h2>
+
+          <div class="hackathon-big-stat">
+            <strong>6</strong>
+            <div>
+              <span>Hackathons</span>
+              <span>800+ Participants</span>
+              <span>100+ AI Agents</span>
+              <span>20+ Moving Towards Production</span>
+            </div>
+          </div>
+
+          <p class="hackathon-intro">
+            What started as a hackathon initiative has grown into a platform for
+            <strong>AI experimentation, innovation, and talent discovery</strong>
+            across iLink Digital.
+          </p>
+
+          <p class="hackathon-intro">
+            Across six hackathons, employees and students have come together to
+            identify real-world challenges, build AI agents, and explore how AI
+            can transform everyday work. The initiative has also created
+            opportunities to <strong>identify and onboard young talent</strong>,
+            with hackathon participants progressing to internships and full-time
+            opportunities with iLink.
+          </p>
+
         </div>
+
+
+        <!-- Journey -->
+        <div class="hackathon-journey">
+
+          <div class="journey-heading">
+            <span class="section-line"></span>
+            <div>
+              <span class="journey-label">THE JOURNEY</span>
+              <h3>From Ideas to Impact</h3>
+            </div>
+          </div>
+
+
+          <div class="journey-list">
+
+            @for (
+            item of selectedEvent.hackathonJourney;
+            track item.number
+            ) {
+
+            <div class="journey-item">
+
+              <!-- Timeline -->
+              <div class="journey-marker">
+                <span>{{ item.number }}</span>
+              </div>
+
+              <!-- Content -->
+              <div class="journey-content">
+
+                <div class="journey-location">
+                  {{ item.location }}
+                </div>
+
+                <h4>
+                  {{ item.title }}
+                </h4>
+
+                <div class="journey-subtitle">
+                  {{ item.subtitle }}
+                </div>
+
+                <p>
+                  {{ item.description }}
+                </p>
+
+                <div class="journey-highlights">
+
+                  @for (
+                  highlight of item.highlights;
+                  track highlight
+                  ) {
+
+                  <div class="journey-highlight">
+                    <span class="highlight-check">✓</span>
+                    <span>{{ highlight }}</span>
+                  </div>
+
+                  }
+
+                </div>
+
+              </div>
+
+            </div>
+
+            }
+
+          </div>
+
+        </div>
+
+
+        <!-- Impact -->
+        <div class="hackathon-impact">
+
+          <div class="impact-heading">
+
+            <span class="section-line"></span>
+
+            <div>
+              <span class="journey-label">FROM IDEAS TO IMPACT</span>
+              <h3>What We've Built Together</h3>
+            </div>
+
+          </div>
+
+
+          <div class="impact-grid">
+
+            @for (
+            impact of selectedEvent.hackathonImpact;
+            track impact.label
+            ) {
+
+            <div class="impact-card">
+
+              <div class="impact-value">
+                {{ impact.value }}
+              </div>
+
+              <div class="impact-label">
+                {{ impact.label }}
+              </div>
+
+            </div>
+
+            }
+
+          </div>
+
+        </div>
+
+
+        <!-- Closing -->
+        <div class="hackathon-closing">
+
+          <div class="closing-accent"></div>
+
+          <div class="closing-content">
+
+            <h3>
+              And the journey continues.
+            </h3>
+
+            <p>
+              From <strong>students discovering AI for the first time</strong>
+              to <strong>employees building agents that automate their everyday
+                work</strong>, every hackathon has added another step to our AI
+              transformation journey.
+            </p>
+
+            <div class="closing-words">
+              Discover.
+              <span>Build.</span>
+              <span>Experiment.</span>
+              <span>Deploy.</span>
+            </div>
+
+            <strong class="closing-cta">
+              Be part of the next one.
+            </strong>
+
+          </div>
+
+        </div>
+
       </div>
 
+      } @else {
+
+      <!-- =====================================================
+            EXISTING MODAL FOR OTHER EVENTS
+            ===================================================== -->
+
+      <div class="modal-header">
+
+        <span class="modal-icon">
+          {{ selectedEvent.icon }}
+        </span>
+
+        <div>
+
+          <h2>
+            {{ selectedEvent.popupTitle }}
+          </h2>
+
+          <p class="modal-date">
+            {{ selectedEvent.date }}
+          </p>
+
+        </div>
+
+      </div>
+
+
       <div class="modal-body">
-        @for (section of selectedEvent.sections; track section.heading) {
+
+        @for (
+        section of selectedEvent.sections;
+        track section.heading
+        ) {
+
         <div class="modal-section">
+
           @if (section.heading) {
           <h3>{{ section.heading }}</h3>
           }
-          @for (para of section.paragraphs; track para) {
+
+          @for (
+          para of section.paragraphs;
+          track para
+          ) {
           <p>{{ para }}</p>
           }
-          @if (section.listItems && section.listItems.length) {
+
+          @if (
+          section.listItems &&
+          section.listItems.length
+          ) {
+
           <ul class="modal-list">
-            @for (item of section.listItems; track item) {
+
+            @for (
+            item of section.listItems;
+            track item
+            ) {
+
             <li>{{ item }}</li>
+
             }
+
           </ul>
+
           }
+
         </div>
+
         }
+
 
         @if (selectedEvent.gallery.length) {
+
         <div class="modal-section">
+
           <h3>Gallery</h3>
+
           <div class="modal-gallery">
-            @for (photo of selectedEvent.gallery; track photo) {
+
+            @for (
+            photo of selectedEvent.gallery;
+            track photo
+            ) {
+
             <div class="gallery-item">
-              <img [src]="photo" alt="Event photo" />
+              <img [src]="photo" alt="Event photo">
             </div>
+
             }
+
           </div>
+
         </div>
+
         }
+
       </div>
 
+
       <div class="modal-footer">
-        <button class="btn btn-primary" (click)="joinNow()">Join Now</button>
-        <button class="btn btn-outline" (click)="closeEvent()">Close</button>
+
+        <button class="btn btn-primary" (click)="joinNow()">
+          Join Now
+        </button>
+
+        <button class="btn btn-outline" (click)="closeEvent()">
+          Close
+        </button>
+
       </div>
+
+      }
 
     </div>
   </div>
