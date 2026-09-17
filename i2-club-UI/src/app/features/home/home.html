@@ -206,21 +206,154 @@
 
   <!-- Hackathon Events -->
   <!-- Hackathon Events -->
+  <!-- Events / Initiatives Section -->
   <section class="events-section">
-    <h2>Events</h2>
 
-    <div class="events-container">
-      @for (event of hackathonEvents; track event.title) {
-      <div class="event-card" (click)="openEvent(event)" tabindex="0">
-        <!-- <div class="event-icon">{{ event.icon }}</div> -->
-        <span class="event-tag">{{ event.tag }}</span>
-        <h3>{{ event.title }}</h3>
-        <p class="event-date">{{ event.date }}</p>
-        <p class="event-desc">{{ event.description }}</p>
-        <!-- <span class="event-link">View details →</span> -->
+    <!-- Section Header -->
+    <div class="events-header">
+
+      <div class="events-heading">
+
+        <div class="events-label">
+          <span class="events-label-line"></span>
+          <span>EVENTS</span>
+        </div>
+
+        <h2>Explore Our Initiatives</h2>
+
+        <p class="events-subtitle">
+          Be a part of exciting AI-focused events and activities across iLink.
+        </p>
+
       </div>
-      }
+
+      <a href="javascript:void(0)" class="view-all-events" (click)="explore()">
+        View All Events
+        <span>→</span>
+      </a>
+
     </div>
+
+
+    <!-- Event Cards -->
+    <div class="events-container">
+
+      @for (event of hackathonEvents; track event.title) {
+
+      <div class="event-card" (click)="openEvent(event)" tabindex="0" (keydown.enter)="openEvent(event)"
+        (keydown.space)="openEvent(event)">
+
+        <!-- Icon -->
+        <div class="event-icon">
+
+          @if (event.icon === 'trophy') {
+          <svg viewBox="0 0 48 48" aria-hidden="true">
+            <path d="M14 7h20v8c0 7-4.5 12-10 12s-10-5-10-12V7Z" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linejoin="round" />
+
+            <path d="M14 11H7v5c0 5 3.5 9 8 9" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" />
+
+            <path d="M34 11h7v5c0 5-3.5 9-8 9" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" />
+
+            <path d="M24 27v7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" />
+
+            <path d="M17 41h14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" />
+
+            <path d="M19 34h10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" />
+          </svg>
+          }
+
+
+          @if (event.icon === 'users') {
+          <svg viewBox="0 0 48 48" aria-hidden="true">
+
+            <circle cx="24" cy="13" r="6" fill="none" stroke="currentColor" stroke-width="2.5" />
+
+            <circle cx="10" cy="19" r="4.5" fill="none" stroke="currentColor" stroke-width="2.5" />
+
+            <circle cx="38" cy="19" r="4.5" fill="none" stroke="currentColor" stroke-width="2.5" />
+
+            <path d="M14 39c0-7 4-11 10-11s10 4 10 11" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" />
+
+            <path d="M3 37c0-5 2.5-8 7-8 2.5 0 4.5 1.1 5.7 3" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" />
+
+            <path d="M45 37c0-5-2.5-8-7-8-2.5 0-4.5 1.1-5.7 3" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" />
+
+          </svg>
+          }
+
+
+          @if (event.icon === 'chat') {
+          <svg viewBox="0 0 48 48" aria-hidden="true">
+
+            <!-- Main speech bubble -->
+            <path d="M7 8h25c3 0 5 2 5 5v14c0 3-2 5-5 5H19l-8 7v-7H7c-3 0-5-2-5-5V13c0-3 2-5 5-5Z" fill="none"
+              stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" />
+
+            <!-- Secondary bubble -->
+            <path d="M31 17h8c3 0 5 2 5 5v10c0 3-2 5-5 5h-4v5l-7-5" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linejoin="round" />
+
+            <!-- Dots -->
+            <circle cx="13" cy="20" r="1.5" fill="currentColor" />
+
+            <circle cx="19" cy="20" r="1.5" fill="currentColor" />
+
+            <circle cx="25" cy="20" r="1.5" fill="currentColor" />
+
+          </svg>
+          }
+
+
+          @if (event.icon === 'star') {
+          <svg viewBox="0 0 48 48" aria-hidden="true">
+
+            <path d="M24 4
+              L29.9 16.8
+              L44 18.3
+              L33.5 27.7
+              L36.4 41.5
+              L24 34.5
+              L11.6 41.5
+              L14.5 27.7
+              L4 18.3
+              L18.1 16.8
+              Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" />
+
+          </svg>
+          }
+
+        </div>
+
+        <!-- Content -->
+        <div class="event-card-content">
+
+          <h3>
+            {{ event.title }}
+          </h3>
+
+          <p class="event-desc">
+            {{ event.description }}
+          </p>
+
+        </div>
+
+        <!-- Arrow -->
+        <div class="event-arrow">
+          →
+        </div>
+
+      </div>
+
+      }
+
+    </div>
+
   </section>
 
   <!-- Event Detail Popup -->

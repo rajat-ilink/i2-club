@@ -520,127 +520,389 @@
   }
 }
 
-/* ===== Events / Carousel Section ===== */
+/* =========================================================
+   EVENTS / INITIATIVES SECTION
+   ========================================================= */
+
 .events-section {
-  max-width: 1200px;
-  margin: 80px auto 0;
-  text-align: center;
+  width: 100%;
+
+  margin: 0 auto 90px;
+
+  padding: 0 0 32px;
+
+  border-bottom: 1px solid #292929;
 }
+
+
+/* =========================================================
+   EVENTS HEADER
+   ========================================================= */
+
+.events-header {
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: space-between;
+
+  gap: 30px;
+
+  margin-bottom: 24px;
+}
+
+
+.events-heading {
+  flex: 1;
+}
+
+
+/* Section label */
+
+.events-label {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 10px;
+
+  color: #e8232a;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  letter-spacing: 2px;
+
+  text-transform: uppercase;
+}
+
+.events-label-line {
+  width: 30px;
+
+  height: 2px;
+
+  background-color: #e8232a;
+
+  box-shadow:
+    0 0 8px rgba(232, 35, 42, 0.35);
+}
+
+
+/* Main heading */
 
 .events-section h2 {
-  color: #e8232a;
-  font-size: 32px;
+  margin: 0 0 5px;
+
+  color: #f5f5f5;
+
+  font-size: 30px;
+
   font-weight: 700;
-  letter-spacing: 0.3px;
-  margin-bottom: 10px;
+
+  line-height: 1.2;
+
+  letter-spacing: -0.5px;
 }
+
+
+/* Subtitle */
 
 .events-subtitle {
-  color: #9aa3ab;
-  font-size: 15.5px;
-  margin-bottom: 44px;
+  margin: 0;
+
+  color: #a9a9a9;
+
+  font-size: 15px;
+
+  line-height: 1.5;
 }
 
-.event-icon {
-  font-size: 30px;
-  margin-bottom: 14px;
-}
 
-.event-tag {
-  display: inline-block;
-  background-color: rgba(232, 35, 42, 0.12);
-  color: #ff6b6f;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.4px;
-  text-transform: uppercase;
-  padding: 4px 12px;
-  border-radius: 14px;
-  margin-bottom: 14px;
-}
+/* =========================================================
+   VIEW ALL EVENTS
+   ========================================================= */
 
-.event-card h3 {
-  color: #ffffff;
-  font-size: 19px;
-  font-weight: 600;
-  margin-bottom: 6px;
-}
+.view-all-events {
+  display: inline-flex;
 
-.event-date {
-  color: #ff8a8e;
-  font-size: 13.5px;
-  font-weight: 600;
-  margin-bottom: 14px;
-}
+  align-items: center;
 
-.event-desc {
-  color: #b0b8c0;
-  font-size: 14.5px;
-  line-height: 1.7;
-  margin-bottom: 18px;
-}
+  gap: 10px;
 
-.event-link {
-  font-size: 14px;
-  font-weight: 600;
+  margin-bottom: 8px;
+
+  padding-bottom: 6px;
+
   color: #e8232a;
-  text-decoration: none;
-  transition: color 0.2s ease;
 
-  &:hover {
-    color: #ff6b6f;
-  }
+  font-size: 14px;
+
+  font-weight: 600;
+
+  text-decoration: none;
+
+  border-bottom: 1px solid rgba(232, 35, 42, 0.45);
+
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  transition:
+    color 0.25s ease,
+    border-color 0.25s ease;
 }
+
+.view-all-events span {
+  font-size: 21px;
+
+  line-height: 12px;
+
+  transition: transform 0.25s ease;
+}
+
+.view-all-events:hover {
+  color: #ff4d55;
+
+  border-color: #ff4d55;
+}
+
+.view-all-events:hover span {
+  transform: translateX(4px);
+}
+
+
+/* =========================================================
+   EVENT CARDS CONTAINER
+   ========================================================= */
 
 .events-container {
-  display: flex;
-  justify-content: center;
-  align-items: stretch;
-  gap: 28px;
-  flex-wrap: nowrap;
-  margin: 40px auto 50px;
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 23px;
+
+  width: 100%;
+
+  margin: 0;
 }
 
+
+/* =========================================================
+   EVENT CARD
+   ========================================================= */
+
 .event-card {
-  // width: 340px;
-  flex: 1 1 0;
-  min-width: 0;
-  max-width: 360px;
-  background: linear-gradient(160deg, #161616, #101010);
-  border: 1px solid #262626;
-  border-radius: 12px;
-  padding: 30px 26px;
-  text-align: left;
   position: relative;
+
+  min-height: 242px;
+
+  padding: 26px 26px 22px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  box-sizing: border-box;
+
+  background:
+    radial-gradient(circle at 90% 100%,
+      rgba(232, 35, 42, 0.12),
+      transparent 45%),
+    linear-gradient(145deg,
+      #151010 0%,
+      #101010 65%,
+      #120d0d 100%);
+
+  border: 1px solid #342525;
+
+  border-radius: 11px;
+
   overflow: hidden;
+
   cursor: pointer;
-  transition: transform 0.3s ease, border-color 0.3s ease,
-    box-shadow 0.3s ease;
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: linear-gradient(90deg, #e8232a, #ff6b6f);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s ease;
-  }
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    background 0.3s ease;
+}
 
-  &:hover,
-  &:focus-visible {
-    transform: translateY(-6px);
-    border-color: #e8232a;
-    box-shadow: 0 14px 32px rgba(232, 35, 42, 0.2);
-    outline: none;
 
-    &::before {
-      transform: scaleX(1);
-    }
-  }
+/* Top red accent */
+
+.event-card::before {
+  content: '';
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+
+  height: 2px;
+
+  background: linear-gradient(90deg,
+      transparent,
+      #e8232a,
+      transparent);
+
+  opacity: 0;
+
+  transition: opacity 0.3s ease;
+}
+
+
+/* Hover */
+
+.event-card:hover,
+.event-card:focus-visible {
+  transform: translateY(-5px);
+
+  border-color: rgba(232, 35, 42, 0.45);
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.35),
+    0 5px 20px rgba(232, 35, 42, 0.08);
+
+  outline: none;
+}
+
+.event-card:hover::before,
+.event-card:focus-visible::before {
+  opacity: 1;
+}
+
+
+/* =========================================================
+   EVENT ICON
+   ========================================================= */
+
+.event-icon {
+  width: 50px;
+  height: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  color: #e8232a;
+
+  margin-bottom: 15px;
+
+  filter:
+    drop-shadow(0 0 5px rgba(232, 35, 42, 0.18));
+
+  transition:
+    transform 0.3s ease,
+    filter 0.3s ease;
+}
+
+.event-icon svg {
+  width: 46px;
+  height: 46px;
+
+  display: block;
+}
+
+.event-card:hover .event-icon {
+  transform: scale(1.06);
+
+  filter:
+    drop-shadow(0 0 9px rgba(232, 35, 42, 0.35));
+}
+
+.event-card:hover .event-icon {
+  transform: scale(1.06);
+
+  filter:
+    drop-shadow(0 0 9px rgba(232, 35, 42, 0.35));
+}
+
+
+/* =========================================================
+   EVENT CONTENT
+   ========================================================= */
+
+.event-card-content {
+  flex: 1;
+}
+
+
+/* Title */
+
+.event-card h3 {
+  margin: 0 0 9px;
+
+  color: #f1f1f1;
+
+  font-size: 19px;
+
+  font-weight: 600;
+
+  line-height: 1.3;
+}
+
+
+/* Description */
+
+.event-desc {
+  margin: 0;
+
+  color: #a9a9a9;
+
+  font-size: 14px;
+
+  line-height: 1.55;
+}
+
+
+/* =========================================================
+   CIRCULAR ARROW
+   ========================================================= */
+
+.event-arrow {
+  width: 38px;
+
+  height: 38px;
+
+  margin-top: 18px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border: 1.5px solid #e8232a;
+
+  border-radius: 50%;
+
+  color: #eeeeee;
+
+  font-size: 20px;
+
+  line-height: 1;
+
+  transition:
+    background-color 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.event-card:hover .event-arrow {
+  background-color: #e8232a;
+
+  transform: translateX(3px);
+
+  box-shadow:
+    0 4px 14px rgba(232, 35, 42, 0.3);
 }
 
 /* platform Section */
@@ -1461,6 +1723,46 @@
     gap: 18px;
   }
 
+  .events-header {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 15px;
+  }
+
+  .events-section h2 {
+    font-size: 27px;
+  }
+
+  .events-subtitle {
+    font-size: 14px;
+  }
+
+  .view-all-events {
+    margin-bottom: 0;
+  }
+
+  .events-container {
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 16px;
+  }
+
+  .event-card {
+    min-height: 220px;
+
+    padding: 22px 20px 20px;
+  }
+
+  .event-card h3 {
+    font-size: 17px;
+  }
+
+  .event-desc {
+    font-size: 13px;
+  }
+
   .modal-header {
     padding: 28px 50px 20px 22px;
     flex-direction: column;
@@ -1544,5 +1846,16 @@
   .event-card {
     width: 100%;
     max-width: 340px;
+  }
+}
+
+@media (max-width: 500px) {
+
+  .events-container {
+    grid-template-columns: 1fr;
+  }
+
+  .event-card {
+    min-height: 210px;
   }
 }

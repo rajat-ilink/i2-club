@@ -35,7 +35,7 @@ export class HomeComponent {
       date: 'Jul 18–19',
       tag: '24-Hour Hackathon',
       description: 'Build AI-powered solutions for real enterprise problems. Open to all teams, mentors on-site.',
-      icon: '⚡',
+      icon: 'trophy',
       popupTitle: 'Our Hackathons',
       sections: [
         {
@@ -89,7 +89,7 @@ export class HomeComponent {
       date: 'Aug 05–06',
       tag: 'Multi-Agent Systems',
       description: 'Design autonomous agent workflows using iGentic. Prizes for the most creative orchestration.',
-      icon: '🤖',
+      icon: 'users',
       popupTitle: 'Our User Group',
       sections: [
         {
@@ -106,13 +106,30 @@ export class HomeComponent {
       date: 'Aug 05–06',
       tag: 'Multi-Agent Systems',
       description: 'Design autonomous agent workflows using iGentic. Prizes for the most creative orchestration.',
-      icon: '🤖',
+      icon: 'chat',
       popupTitle: 'Thinking Beyond',
       sections: [
         {
           heading: 'About This Event',
           paragraphs: [
             'Thinking Beyond is a forum for exploring ambitious, longer-horizon ideas in applied AI — beyond the scope of a single hackathon sprint.'
+          ]
+        }
+      ],
+      gallery: []
+    },
+    {
+      title: 'iLink League',
+      date: '',
+      tag: 'Community',
+      description: 'Engage. Contribute. Lead.',
+      icon: 'star',
+      popupTitle: 'iLink League',
+      sections: [
+        {
+          heading: 'iLink League',
+          paragraphs: [
+            'Details about the iLink League will be shared soon.'
           ]
         }
       ],
