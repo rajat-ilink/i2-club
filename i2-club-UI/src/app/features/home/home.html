@@ -556,6 +556,55 @@
 
         </div>
 
+        <!-- =====================================================
+        HACKATHON GALLERY
+        ===================================================== -->
+
+        <div class="hackathon-gallery-section">
+
+          <div class="hackathon-gallery-heading">
+
+            <div class="gallery-section-line"></div>
+
+            <div>
+              <span class="gallery-label">MOMENTS FROM THE JOURNEY</span>
+
+              <h3>Hackathon Highlights</h3>
+            </div>
+
+          </div>
+
+
+          <div class="hackathon-gallery">
+
+            <div class="hackathon-gallery-item">
+              <img src="images/hackathon/hackathon-01.jpg" alt="AI Hackathon highlight 1">
+            </div>
+
+            <div class="hackathon-gallery-item">
+              <img src="images/hackathon/hackathon-02.jpg" alt="AI Hackathon highlight 2">
+            </div>
+
+            <div class="hackathon-gallery-item">
+              <img src="images/hackathon/hackathon-03.jpg" alt="AI Hackathon highlight 3">
+            </div>
+
+            <div class="hackathon-gallery-item">
+              <img src="images/hackathon/hackathon-04.jpg" alt="AI Hackathon highlight 4">
+            </div>
+
+            <div class="hackathon-gallery-item">
+              <img src="images/hackathon/hackathon-05.jpg" alt="AI Hackathon highlight 5">
+            </div>
+
+            <div class="hackathon-gallery-item">
+              <img src="images/hackathon/hackathon-06.jpg" alt="AI Hackathon highlight 6">
+            </div>
+
+          </div>
+
+        </div>
+
       </div>
 
       } @else {
@@ -676,19 +725,345 @@
   </div>
   }
 
-  <!-- CTA Banner -->
-  <section class="cta-banner">
-    <div class="cta-banner-content">
-      <p class="cta-quote">
-        "Got a wild idea? <span class="highlight">This is where it gets built.</span>"
-      </p>
-      <p class="cta-subtext">Join the next event or explore what i² Club is building.</p>
+  <!-- AI Agents Section -->
+  <section class="cta-banner ai-agents-section">
+
+    <div class="ai-agents-header">
+
+      <div class="ai-agents-heading">
+
+        <div class="ai-agents-label">
+          <span class="ai-agents-label-line"></span>
+          <span>AI AGENTS WE HAVE</span>
+        </div>
+
+        <h2>AI Agents</h2>
+
+        <p>
+          Explore the AI agents built by iLink across different teams and use cases.
+        </p>
+
+      </div>
+
+      <a class="view-all-agents" routerLink="/ai-agents">
+        View All Agents
+        <span>→</span>
+      </a>
+
     </div>
 
-    <div class="cta-buttons">
-      <button class="btn btn-primary" (click)="joinNow()">Join Now</button>
-      <button class="btn btn-outline" (click)="explore()">Explore</button>
+
+    <div class="ai-agents-container">
+
+      <!-- Productivity Agents -->
+      <div class="ai-agent-card">
+
+        <div class="ai-agent-icon">
+
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+            stroke-linejoin="round">
+
+            <path d="M14 5h15l7 7v31H14z"></path>
+            <path d="M29 5v8h7"></path>
+            <path d="M19 21h12"></path>
+            <path d="M19 27h12"></path>
+            <path d="M19 33h8"></path>
+
+          </svg>
+
+        </div>
+
+        <div class="ai-agent-content">
+
+          <h3>Productivity Agents</h3>
+
+          <p>
+            Automate everyday tasks<br>
+            and save time.
+          </p>
+
+        </div>
+
+        <a class="ai-agent-arrow" routerLink="/ai-agents" aria-label="Explore Productivity Agents">
+          →
+        </a>
+
+      </div>
+
+
+      <!-- Knowledge Agents -->
+      <div class="ai-agent-card">
+
+        <div class="ai-agent-icon">
+
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+            stroke-linejoin="round">
+
+            <ellipse cx="24" cy="10" rx="13" ry="5"></ellipse>
+            <path d="M11 10v10c0 3 6 5 13 5s13-2 13-5V10"></path>
+            <path d="M11 20v10c0 3 6 5 13 5s13-2 13-5V20"></path>
+            <path d="M11 30v8c0 3 6 5 13 5s13-2 13-5v-8"></path>
+
+          </svg>
+
+        </div>
+
+        <div class="ai-agent-content">
+
+          <h3>Knowledge Agents</h3>
+
+          <p>
+            Find information faster<br>
+            and smarter.
+          </p>
+
+        </div>
+
+        <a class="ai-agent-arrow" routerLink="/ai-agents" aria-label="Explore Knowledge Agents">
+          →
+        </a>
+
+      </div>
+
+
+      <!-- Operations Agents -->
+      <div class="ai-agent-card">
+
+        <div class="ai-agent-icon">
+
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+            stroke-linejoin="round">
+
+            <circle cx="24" cy="24" r="7"></circle>
+
+            <path d="M24 5v6"></path>
+            <path d="M24 37v6"></path>
+
+            <path d="m10.6 10.6 4.2 4.2"></path>
+            <path d="m33.2 33.2 4.2 4.2"></path>
+
+            <path d="M5 24h6"></path>
+            <path d="M37 24h6"></path>
+
+            <path d="m10.6 37.4 4.2-4.2"></path>
+            <path d="m33.2 14.8 4.2-4.2"></path>
+
+            <path d="M15 7.5l2 4.8"></path>
+            <path d="M31 35.7l2 4.8"></path>
+
+          </svg>
+
+        </div>
+
+        <div class="ai-agent-content">
+
+          <h3>Operations Agents</h3>
+
+          <p>
+            Streamline processes<br>
+            and improve efficiency.
+          </p>
+
+        </div>
+
+        <a class="ai-agent-arrow" routerLink="/ai-agents" aria-label="Explore Operations Agents">
+          →
+        </a>
+
+      </div>
+
     </div>
+
+  </section>
+
+  <!-- Your Ideas Section -->
+  <section class="your-ideas-section">
+
+    <div class="your-ideas-content">
+
+      <div class="your-ideas-label">
+        <span class="your-ideas-label-line"></span>
+        <span>YOUR IDEAS</span>
+      </div>
+
+      <h2>Got an idea?</h2>
+
+      <p>
+        Share your AI ideas and help shape<br class="desktop-break">
+        the next big innovation at iLink.
+      </p>
+
+      <button class="submit-idea-btn" type="button" (click)="submitIdea()">
+        <span>Submit Your Idea</span>
+        <span class="submit-idea-arrow">→</span>
+      </button>
+
+    </div>
+
+
+    <!-- Quote Card -->
+    <div class="your-ideas-quote">
+
+      <div class="quote-mark">
+        “
+      </div>
+
+      <div class="quote-content">
+
+        <p class="quote-text">
+          Innovation begins<br>
+          with a question.
+        </p>
+
+        <span class="quote-author">
+          — i² CLUB
+        </span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- AI Challenge Section -->
+  <section class="ai-challenge-section">
+
+    <div class="ai-challenge-content">
+
+      <div class="ai-challenge-label">
+        <span class="ai-challenge-label-line"></span>
+        <span>PLAY &amp; LEARN</span>
+      </div>
+
+      <h2>
+        The AI Challenge
+      </h2>
+
+      <p>
+        Test your knowledge, earn points and climb the leaderboard.<br>
+        Learning can be fun!
+      </p>
+
+      <button type="button" class="play-now-btn" (click)="playChallenge()">
+
+        <span>Play Now</span>
+        <span class="play-now-arrow">→</span>
+
+      </button>
+
+    </div>
+
+
+    <!-- Challenge Benefits -->
+    <div class="ai-challenge-benefits">
+
+      <div class="challenge-benefit">
+
+        <span class="challenge-check">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"></circle>
+            <path d="m8 12 2.5 2.5L16 9"></path>
+          </svg>
+        </span>
+
+        <span>Answer AI-based questions</span>
+
+      </div>
+
+
+      <div class="challenge-benefit">
+
+        <span class="challenge-check">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"></circle>
+            <path d="m8 12 2.5 2.5L16 9"></path>
+          </svg>
+        </span>
+
+        <span>Earn points and unlock badges</span>
+
+      </div>
+
+
+      <div class="challenge-benefit">
+
+        <span class="challenge-check">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"></circle>
+            <path d="m8 12 2.5 2.5L16 9"></path>
+          </svg>
+        </span>
+
+        <span>Be on the leaderboard</span>
+
+      </div>
+
+
+      <div class="challenge-benefit">
+
+        <span class="challenge-check">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"></circle>
+            <path d="m8 12 2.5 2.5L16 9"></path>
+          </svg>
+        </span>
+
+        <span>Become an AI Champion</span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- Join i² Club CTA -->
+  <section class="join-club-section">
+
+    <div class="join-club-left-waves" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="join-club-right-waves" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="join-club-content">
+
+      <h2>
+        Join
+        <span class="join-club-brand">
+          i<sup>2</sup> CLUB
+        </span>
+        Today
+      </h2>
+
+      <p>
+        Be the first to know about upcoming events, new AI agents,<br>
+        exciting opportunities and all things AI at iLink.
+      </p>
+
+      <button type="button" class="join-club-btn" (click)="joinNow()">
+
+        <span>Login / Sign up</span>
+
+        <span class="join-club-caret">
+          ⌄
+        </span>
+
+      </button>
+
+    </div>
+
   </section>
 
 </div>

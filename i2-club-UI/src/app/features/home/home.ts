@@ -192,23 +192,23 @@ export class HomeComponent {
       ],
       gallery: []
     },
-    {
-      title: 'Thinking Beyond',
-      date: 'Aug 05–06',
-      tag: 'Multi-Agent Systems',
-      description: 'Design autonomous agent workflows using iGentic. Prizes for the most creative orchestration.',
-      icon: 'chat',
-      popupTitle: 'Thinking Beyond',
-      sections: [
-        {
-          heading: 'About This Event',
-          paragraphs: [
-            'Thinking Beyond is a forum for exploring ambitious, longer-horizon ideas in applied AI — beyond the scope of a single hackathon sprint.'
-          ]
-        }
-      ],
-      gallery: []
-    },
+    // {
+    //   title: 'Thinking Beyond',
+    //   date: 'Aug 05–06',
+    //   tag: 'Multi-Agent Systems',
+    //   description: 'Design autonomous agent workflows using iGentic. Prizes for the most creative orchestration.',
+    //   icon: 'chat',
+    //   popupTitle: 'Thinking Beyond',
+    //   sections: [
+    //     {
+    //       heading: 'About This Event',
+    //       paragraphs: [
+    //         'Thinking Beyond is a forum for exploring ambitious, longer-horizon ideas in applied AI — beyond the scope of a single hackathon sprint.'
+    //       ]
+    //     }
+    //   ],
+    //   gallery: []
+    // },
     {
       title: 'iLink League',
       date: '',
@@ -252,5 +252,13 @@ export class HomeComponent {
 
   explore(): void {
     // hook up routing or scroll-to-section here
+  }
+
+  submitIdea(): void {
+    // Add idea submission functionality later
+  }
+
+  playChallenge(): void {
+    // Add AI Challenge functionality later
   }
 }
