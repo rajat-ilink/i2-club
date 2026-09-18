@@ -1,4 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { GamesComponent } from '../games/games.component';
 
 interface InfoSection {
   heading: string;
@@ -88,6 +89,7 @@ interface EventModalContent {
 @Component({
   selector: 'app-home',
   standalone: true,
+  imports: [GamesComponent],
   templateUrl: './home.html',
   styleUrls: ['./home.scss']
 })

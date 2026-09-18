@@ -1,1 +1,234 @@
-<p>ai-agents works!</p>
+<div class="ai-agents-page">
+
+    <!-- =====================================================
+       HERO
+       ===================================================== -->
+
+    <section class="ai-agents-hero">
+
+        <div class="hero-glow hero-glow-left"></div>
+        <div class="hero-glow hero-glow-right"></div>
+
+        <div class="hero-grid"></div>
+
+        <div class="ai-agents-hero-content">
+
+            <div class="section-label">
+                <span class="section-label-line"></span>
+                <span>AI AGENTS</span>
+            </div>
+
+            <h1>
+                Meet the intelligence<br>
+                <span>behind i² CLUB.</span>
+            </h1>
+
+            <p>
+                Explore AI agents built to automate workflows,
+                unlock insights and help teams work smarter.
+            </p>
+
+        </div>
+
+        <div class="hero-agent-orbit">
+
+            <div class="orbit orbit-one"></div>
+            <div class="orbit orbit-two"></div>
+            <div class="orbit orbit-three"></div>
+
+            <div class="orbit-core">
+                <span>AI</span>
+            </div>
+
+            <span class="orbit-dot dot-one"></span>
+            <span class="orbit-dot dot-two"></span>
+            <span class="orbit-dot dot-three"></span>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+       AGENTS
+       ===================================================== -->
+
+    <section class="agents-section">
+
+        <div class="agents-top">
+
+            <div>
+                <div class="section-label">
+                    <span class="section-label-line"></span>
+                    <span>OUR AI ECOSYSTEM</span>
+                </div>
+
+                <h2>Explore our agents</h2>
+
+                <p class="agents-intro">
+                    From recruitment and operations to analytics and customer
+                    service, discover intelligent agents designed for real-world impact.
+                </p>
+            </div>
+
+
+            <div class="agent-count">
+
+                <strong>{{ agents.length }}</strong>
+
+                <span>AI AGENTS</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Search -->
+
+        <div class="agent-search-wrapper">
+
+            <div class="agent-search">
+
+                <span class="search-icon">⌕</span>
+
+                <input type="text" [(ngModel)]="searchTerm" placeholder="Search AI agents..."
+                    aria-label="Search AI agents" />
+
+                @if (searchTerm) {
+                <button type="button" class="clear-search" (click)="clearSearch()" aria-label="Clear search">
+                    ×
+                </button>
+                }
+
+            </div>
+
+            <span class="search-result-count">
+                {{ filteredAgents.length }} agents
+            </span>
+
+        </div>
+
+
+        <!-- Agent Grid -->
+
+        @if (filteredAgents.length > 0) {
+
+        <div class="agents-grid">
+
+            @for (
+            agent of filteredAgents;
+            track agent.name;
+            let i = $index
+            ) {
+
+            <article class="agent-card">
+
+                <div class="agent-card-top">
+
+                    <div class="agent-icon">
+                        {{ agent.icon }}
+                    </div>
+
+                    <span class="agent-number">
+                        {{ (i + 1).toString().padStart(2, '0') }}
+                    </span>
+
+                </div>
+
+
+                <div class="agent-category">
+                    {{ agent.category }}
+                </div>
+
+
+                <h3>
+                    {{ agent.name }}
+                </h3>
+
+
+                <p>
+                    {{ agent.description }}
+                </p>
+
+
+                <div class="agent-card-footer">
+
+                    <span>Explore agent</span>
+
+                    <span class="agent-arrow">
+                        →
+                    </span>
+
+                </div>
+
+            </article>
+
+            }
+
+        </div>
+
+        } @else {
+
+        <div class="no-agents">
+
+            <div class="no-agents-icon">⌕</div>
+
+            <h3>No agents found</h3>
+
+            <p>
+                Try searching with a different keyword.
+            </p>
+
+            <button type="button" (click)="clearSearch()">
+                Clear Search
+            </button>
+
+        </div>
+
+        }
+
+    </section>
+
+
+    <!-- =====================================================
+       BOTTOM CTA
+       ===================================================== -->
+
+    <section class="agents-cta">
+
+        <div class="agents-cta-glow"></div>
+
+        <div class="agents-cta-content">
+
+            <div class="section-label">
+                <span class="section-label-line"></span>
+                <span>ONE ECOSYSTEM</span>
+            </div>
+
+            <h2>
+                One platform.<br>
+                <span>Endless possibilities.</span>
+            </h2>
+
+            <p>
+                Discover how AI agents can transform the way
+                your teams work, collaborate and innovate.
+            </p>
+
+            <button type="button" class="agents-cta-btn">
+                <span>Get Started</span>
+                <span>→</span>
+            </button>
+
+        </div>
+
+        <div class="cta-decoration">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+    </section>
+
+</div>

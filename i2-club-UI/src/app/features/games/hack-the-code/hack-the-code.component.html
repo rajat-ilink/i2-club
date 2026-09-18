@@ -1,0 +1,133 @@
+<div class="htc-panel" [class.htc-shaking]="shaking" role="main" aria-label="Hack the Code game panel">
+
+  <!-- ═══════════════════════════════════════════
+       SYSTEM STATUS BAR (decorative)
+       ═══════════════════════════════════════════ -->
+  <!-- <div class="htc-status-bar" aria-hidden="true">
+    @for (item of systemStatus; track item.label) {
+      <div class="htc-status-item">
+        <span class="htc-status-dot"></span>
+        <span class="htc-status-label">{{ item.label }}</span>
+        <span class="htc-status-colon">:</span>
+        <span class="htc-status-value" [class.htc-status-red]="item.value === 'RED'">
+          {{ item.value }}
+        </span>
+      </div>
+    }
+  </div> -->
+
+  <!-- ═══════════════════════════════════════════
+       PANEL HEADER
+       ═══════════════════════════════════════════ -->
+  <div class="htc-header">
+    <div class="htc-lock-icon" aria-hidden="true">
+      <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+        stroke-linejoin="round">
+        <rect x="10" y="22" width="28" height="22" rx="3" />
+        <path d="M16 22v-6a8 8 0 0 1 16 0v6" />
+        <circle cx="24" cy="33" r="2.5" fill="currentColor" stroke="none" />
+        <path d="M24 35.5v3" />
+      </svg>
+    </div>
+    <div class="htc-header-text">
+      <h3 id="htc-title">SECURITY SYSTEM</h3>
+      <p class="htc-header-sub">CRACK THE 4-DIGIT ACCESS CODE</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       CLUES
+       ═══════════════════════════════════════════ -->
+  @if (puzzle) {
+  <div class="htc-clues-section" aria-labelledby="htc-clues-heading">
+    <div class="htc-clues-heading" id="htc-clues-heading">
+      <span class="htc-clues-line"></span>
+      <span>CLUES</span>
+      <span class="htc-clues-line"></span>
+    </div>
+
+    <ul class="htc-clues-list" aria-label="Code clues">
+      @for (clue of puzzle.clues; track clue.guess; let i = $index) {
+      <li class="htc-clue" [attr.aria-label]="'Clue ' + (i + 1) + ': guess ' + clue.guess + '. ' + clue.description">
+        <div class="htc-clue-guess">
+          @for (digit of clue.guess.split(''); track $index) {
+          <span class="htc-clue-digit">{{ digit }}</span>
+          }
+        </div>
+        <div class="htc-clue-indicator" [class]="'htc-indicator-' + i" aria-hidden="true">
+          <span class="htc-indicator-dot"></span>
+        </div>
+        <div class="htc-clue-desc">{{ clue.description }}</div>
+      </li>
+      }
+    </ul>
+  </div>
+  }
+
+  <!-- ═══════════════════════════════════════════
+       INPUT SECTION
+       ═══════════════════════════════════════════ -->
+  <div class="htc-input-section">
+
+    <div class="htc-input-label" id="htc-input-label">ACCESS CODE</div>
+
+    <!-- 4-digit inputs -->
+    <div class="htc-digit-row" role="group" aria-labelledby="htc-input-label">
+      @for (digit of digits; track $index; let i = $index) {
+      <input #digitInput class="htc-digit-input" [class.htc-digit-filled]="digits[i] !== ''"
+        [class.htc-digit-correct]="gameState === 'correct'" [class.htc-digit-wrong]="gameState === 'wrong'" type="text"
+        inputmode="numeric" pattern="[0-9]*" maxlength="1" autocomplete="off" [value]="digits[i]"
+        [attr.aria-label]="'Digit ' + (i + 1) + ' of 4'" [attr.aria-describedby]="'htc-title'"
+        [disabled]="gameState === 'correct'" (input)="onDigitInput(i, $event)" (keydown)="onDigitKeydown(i, $event)"
+        (paste)="onDigitPaste($event)" />
+      }
+    </div>
+
+    <!-- Attempt counter (informational only) -->
+    @if (attempts > 0) {
+    <div class="htc-attempts" aria-live="polite" aria-atomic="true">
+      ATTEMPTS: {{ attempts }}
+    </div>
+    }
+
+    <!-- Submit button -->
+    <button class="htc-submit-btn" type="button" [disabled]="!canSubmit" (click)="checkCode()"
+      aria-label="Hack the system — submit your code">
+      <span class="htc-submit-text">HACK THE SYSTEM</span>
+      <span class="htc-submit-icon" aria-hidden="true">→</span>
+    </button>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       RESULT — WRONG
+       ═══════════════════════════════════════════ -->
+  @if (gameState === 'wrong') {
+  <div class="htc-result htc-result-wrong" role="alert" aria-live="assertive">
+    <div class="htc-result-icon" aria-hidden="true">🚫</div>
+    <div class="htc-result-body">
+      <strong class="htc-result-title">ACCESS DENIED</strong>
+      <p class="htc-result-msg">Incorrect code. Analyze the clues and try again.</p>
+    </div>
+  </div>
+  }
+
+  <!-- ═══════════════════════════════════════════
+       RESULT — CORRECT
+       ═══════════════════════════════════════════ -->
+  @if (gameState === 'correct') {
+  <div class="htc-result htc-result-correct" role="alert" aria-live="assertive">
+    <div class="htc-result-icon" aria-hidden="true">🔓</div>
+    <div class="htc-result-body">
+      <strong class="htc-result-title">ACCESS GRANTED</strong>
+      <p class="htc-result-msg">SYSTEM BREACHED — You cracked the security code!</p>
+    </div>
+  </div>
+
+  <button class="htc-next-btn" type="button" (click)="nextChallenge()" aria-label="Load next challenge">
+    NEXT CHALLENGE
+    <span class="htc-next-icon" aria-hidden="true">→</span>
+  </button>
+  }
+
+</div>

@@ -1,0 +1,805 @@
+// ═══════════════════════════════════════════════════════════════
+//  HACK THE CODE — Component Styles
+//  Matches existing site tokens: #e8232a red, #0a0a0a bg,
+//  #101010/#121212 card bg, #292929 borders, Segoe UI font
+// ═══════════════════════════════════════════════════════════════
+
+// ─── Shake animation (wrong answer) ────────────────────────────
+@keyframes htc-shake {
+  0%   { transform: translateX(0); }
+  15%  { transform: translateX(-7px); }
+  30%  { transform: translateX(7px); }
+  45%  { transform: translateX(-5px); }
+  60%  { transform: translateX(5px); }
+  75%  { transform: translateX(-3px); }
+  90%  { transform: translateX(3px); }
+  100% { transform: translateX(0); }
+}
+
+// ─── Success pulse (correct answer) ────────────────────────────
+@keyframes htc-success-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.35); }
+  60%  { box-shadow: 0 0 0 18px rgba(34, 197, 94, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+}
+
+// ─── Fade-in (result panels) ────────────────────────────────────
+@keyframes htc-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+// ─── Result slide-in ───────────────────────────────────────────
+@keyframes htc-slide-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  PANEL CONTAINER
+// ═══════════════════════════════════════════════════════════════
+
+.htc-panel {
+  position: relative;
+
+  // Fills the modal body — modal provides max-width & container chrome
+  width: 100%;
+
+  background:
+    radial-gradient(ellipse at 50% 0%,
+      rgba(232, 35, 42, 0.07) 0%,
+      transparent 55%),
+    #0e0e0e;
+
+  // No outer border — the modal shell provides it
+  border: none;
+
+  border-radius: 0;
+
+  overflow: hidden;
+
+  // Subtle outer glow
+  box-shadow:
+    0 0 40px rgba(232, 35, 42, 0.06),
+    0 8px 32px rgba(0, 0, 0, 0.5);
+
+  &.htc-shaking {
+    animation: htc-shake 0.6s ease;
+  }
+}
+
+
+// ═══════════════════════════════════════════════════════════════
+//  STATUS BAR
+// ═══════════════════════════════════════════════════════════════
+
+.htc-status-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0;
+
+  padding: 8px 20px;
+
+  background: rgba(232, 35, 42, 0.06);
+  border-bottom: 1px solid #222222;
+}
+
+.htc-status-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  padding: 0 16px 0 0;
+
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+
+  // Divider between items
+  & + & {
+    padding-left: 16px;
+    border-left: 1px solid #2a2a2a;
+  }
+}
+
+.htc-status-dot {
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: #22c55e;
+
+  box-shadow: 0 0 6px rgba(34, 197, 94, 0.6);
+}
+
+.htc-status-label {
+  color: #666666;
+}
+
+.htc-status-colon {
+  color: #444444;
+}
+
+.htc-status-value {
+  color: #888888;
+
+  &.htc-status-red {
+    color: #e8232a;
+  }
+}
+
+
+// ═══════════════════════════════════════════════════════════════
+//  PANEL HEADER
+// ═══════════════════════════════════════════════════════════════
+
+.htc-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  padding: 24px 28px 18px;
+
+  border-bottom: 1px solid #1e1e1e;
+}
+
+.htc-lock-icon {
+  flex-shrink: 0;
+
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #e8232a;
+
+  svg {
+    width: 36px;
+    height: 36px;
+    display: block;
+  }
+}
+
+.htc-header-text {
+  h3 {
+    margin: 0 0 4px;
+
+    color: #f0f0f0;
+
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+
+    font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+  }
+}
+
+.htc-header-sub {
+  margin: 0;
+
+  color: #e8232a;
+
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+
+// ═══════════════════════════════════════════════════════════════
+//  CLUES SECTION
+// ═══════════════════════════════════════════════════════════════
+
+.htc-clues-section {
+  padding: 20px 28px;
+  border-bottom: 1px solid #1e1e1e;
+}
+
+.htc-clues-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin-bottom: 16px;
+
+  color: #666666;
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+.htc-clues-line {
+  flex: 1;
+  height: 1px;
+  background: #1e1e1e;
+}
+
+.htc-clues-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.htc-clue {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  padding: 10px 14px;
+
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid #1e1e1e;
+  border-radius: 7px;
+
+  transition: border-color 0.2s ease, background 0.2s ease;
+
+  &:hover {
+    border-color: #2a2a2a;
+    background: rgba(255, 255, 255, 0.03);
+  }
+}
+
+// 4-digit guess display
+.htc-clue-guess {
+  display: flex;
+  gap: 4px;
+
+  flex-shrink: 0;
+}
+
+.htc-clue-digit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 28px;
+  height: 32px;
+
+  background: #141414;
+  border: 1px solid #2a2a2a;
+  border-radius: 5px;
+
+  color: #cccccc;
+
+  font-size: 15px;
+  font-weight: 600;
+  font-family: 'Segoe UI', Roboto, monospace, sans-serif;
+  letter-spacing: 0;
+}
+
+// Colored indicator dot
+.htc-clue-indicator {
+  flex-shrink: 0;
+
+  width: 10px;
+  height: 10px;
+}
+
+.htc-indicator-dot {
+  display: block;
+
+  width: 10px;
+  height: 10px;
+
+  border-radius: 50%;
+}
+
+// Indicator color variants (matches the brief's conceptual color scheme)
+.htc-indicator-0 .htc-indicator-dot { background: #e8232a; box-shadow: 0 0 6px rgba(232, 35, 42, 0.5); }
+.htc-indicator-1 .htc-indicator-dot { background: #d4a017; box-shadow: 0 0 6px rgba(212, 160, 23, 0.5); }
+.htc-indicator-2 .htc-indicator-dot { background: #3b82f6; box-shadow: 0 0 6px rgba(59, 130, 246, 0.5); }
+.htc-indicator-3 .htc-indicator-dot { background: #555555; box-shadow: none; }
+.htc-indicator-4 .htc-indicator-dot { background: #a855f7; box-shadow: 0 0 6px rgba(168, 85, 247, 0.4); }
+
+.htc-clue-desc {
+  flex: 1;
+
+  color: #b0b0b0;
+
+  font-size: 13.5px;
+  line-height: 1.45;
+
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+
+// ═══════════════════════════════════════════════════════════════
+//  INPUT SECTION
+// ═══════════════════════════════════════════════════════════════
+
+.htc-input-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 24px 28px;
+
+  gap: 20px;
+}
+
+.htc-input-label {
+  color: #666666;
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+// 4-digit input row
+.htc-digit-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.htc-digit-input {
+  width: 64px;
+  height: 72px;
+
+  background: #0d0d0d;
+  border: 1.5px solid #2a2a2a;
+  border-radius: 8px;
+
+  color: #f0f0f0;
+
+  font-size: 28px;
+  font-weight: 700;
+  text-align: center;
+
+  font-family: 'Segoe UI', Roboto, monospace, sans-serif;
+
+  caret-color: #e8232a;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+
+  // Numeric only
+  -moz-appearance: textfield;
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+
+  &:focus {
+    border-color: #e8232a;
+    box-shadow: 0 0 0 3px rgba(232, 35, 42, 0.15);
+    background: #111111;
+  }
+
+  &.htc-digit-filled:not(:focus) {
+    border-color: #3a3a3a;
+    background: #111111;
+  }
+
+  &.htc-digit-correct {
+    border-color: #22c55e;
+    color: #22c55e;
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.12);
+    animation: htc-success-pulse 1s ease forwards;
+  }
+
+  &.htc-digit-wrong {
+    border-color: #e8232a;
+    box-shadow: 0 0 0 3px rgba(232, 35, 42, 0.15);
+  }
+
+  &:disabled {
+    cursor: default;
+    opacity: 0.85;
+  }
+}
+
+// Attempt counter
+.htc-attempts {
+  color: #555555;
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+
+  align-self: center;
+}
+
+// Submit button
+.htc-submit-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  min-width: 220px;
+  height: 50px;
+  padding: 0 28px;
+
+  background: linear-gradient(135deg, #e8232a, #b8161c);
+  border: none;
+  border-radius: 7px;
+
+  color: #ffffff;
+
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+
+  cursor: pointer;
+
+  box-shadow: 0 6px 18px rgba(232, 35, 42, 0.3);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    opacity 0.2s ease;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px rgba(232, 35, 42, 0.45);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+}
+
+.htc-submit-text {
+  letter-spacing: 2px;
+}
+
+.htc-submit-icon {
+  font-size: 18px;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.htc-submit-btn:hover:not(:disabled) .htc-submit-icon {
+  transform: translateX(3px);
+}
+
+
+// ═══════════════════════════════════════════════════════════════
+//  RESULT PANELS
+// ═══════════════════════════════════════════════════════════════
+
+.htc-result {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  margin: 0 28px 20px;
+  padding: 14px 18px;
+
+  border-radius: 8px;
+  border: 1px solid transparent;
+
+  animation: htc-fade-in 0.35s ease forwards;
+}
+
+.htc-result-icon {
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.htc-result-body {
+  flex: 1;
+}
+
+.htc-result-title {
+  display: block;
+
+  color: #f0f0f0;
+
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+
+  margin-bottom: 3px;
+}
+
+.htc-result-msg {
+  margin: 0;
+
+  font-size: 13px;
+  line-height: 1.45;
+
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+// Wrong state
+.htc-result-wrong {
+  background: rgba(232, 35, 42, 0.07);
+  border-color: rgba(232, 35, 42, 0.25);
+
+  .htc-result-msg {
+    color: #c0c0c0;
+  }
+}
+
+// Correct state
+.htc-result-correct {
+  background: rgba(34, 197, 94, 0.07);
+  border-color: rgba(34, 197, 94, 0.25);
+
+  .htc-result-title {
+    color: #22c55e;
+  }
+
+  .htc-result-msg {
+    color: #a0d9b0;
+  }
+}
+
+// Next challenge button
+.htc-next-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  margin: 0 28px 28px;
+  padding: 12px 24px;
+
+  background: transparent;
+  border: 1.5px solid #22c55e;
+  border-radius: 7px;
+
+  color: #22c55e;
+
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+
+  cursor: pointer;
+
+  animation: htc-slide-in 0.4s ease 0.2s both;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+
+  &:hover {
+    background: #22c55e;
+    color: #0a0a0a;
+    transform: translateY(-2px);
+  }
+}
+
+.htc-next-icon {
+  font-size: 16px;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.htc-next-btn:hover .htc-next-icon {
+  transform: translateX(3px);
+}
+
+
+// ═══════════════════════════════════════════════════════════════
+//  RESPONSIVE — 768px
+// ═══════════════════════════════════════════════════════════════
+
+@media (max-width: 768px) {
+
+  .htc-status-bar {
+    gap: 4px 0;
+    padding: 8px 16px;
+  }
+
+  .htc-status-item {
+    font-size: 9px;
+    padding-right: 12px;
+
+    & + & {
+      padding-left: 12px;
+    }
+  }
+
+  .htc-header {
+    padding: 18px 20px 14px;
+    gap: 12px;
+  }
+
+  .htc-header-text h3 {
+    font-size: 16px;
+    letter-spacing: 2px;
+  }
+
+  .htc-header-sub {
+    font-size: 10px;
+  }
+
+  .htc-clues-section {
+    padding: 16px 20px;
+  }
+
+  .htc-clue {
+    gap: 10px;
+    padding: 9px 12px;
+  }
+
+  .htc-clue-digit {
+    width: 24px;
+    height: 28px;
+    font-size: 13px;
+  }
+
+  .htc-clue-desc {
+    font-size: 12.5px;
+  }
+
+  .htc-input-section {
+    padding: 20px 20px;
+    gap: 16px;
+  }
+
+  .htc-digit-input {
+    width: 56px;
+    height: 64px;
+    font-size: 24px;
+    border-radius: 7px;
+  }
+
+  .htc-submit-btn {
+    min-width: 190px;
+    height: 46px;
+    font-size: 12px;
+  }
+
+  .htc-result {
+    margin: 0 20px 16px;
+    padding: 12px 14px;
+  }
+
+  .htc-next-btn {
+    margin: 0 20px 20px;
+  }
+
+}
+
+
+// ═══════════════════════════════════════════════════════════════
+//  RESPONSIVE — 520px
+// ═══════════════════════════════════════════════════════════════
+
+@media (max-width: 520px) {
+
+  .htc-status-bar {
+    // Hide on very small screens to save space
+    display: none;
+  }
+
+  .htc-header {
+    padding: 16px 16px 12px;
+    gap: 10px;
+  }
+
+  .htc-lock-icon {
+    width: 36px;
+    height: 36px;
+
+    svg {
+      width: 28px;
+      height: 28px;
+    }
+  }
+
+  .htc-header-text h3 {
+    font-size: 14px;
+    letter-spacing: 1.5px;
+  }
+
+  .htc-clues-section {
+    padding: 14px 16px;
+  }
+
+  .htc-clue {
+    gap: 8px;
+    padding: 8px 10px;
+  }
+
+  .htc-clue-digit {
+    width: 22px;
+    height: 26px;
+    font-size: 12px;
+    border-radius: 4px;
+  }
+
+  .htc-clue-guess {
+    gap: 3px;
+  }
+
+  .htc-clue-desc {
+    font-size: 12px;
+  }
+
+  .htc-input-section {
+    padding: 18px 16px;
+    gap: 14px;
+  }
+
+  .htc-digit-row {
+    gap: 8px;
+  }
+
+  .htc-digit-input {
+    width: 52px;
+    height: 60px;
+    font-size: 22px;
+    border-radius: 6px;
+  }
+
+  .htc-submit-btn {
+    min-width: 0;
+    width: 100%;
+    max-width: 280px;
+    height: 46px;
+    font-size: 11px;
+    padding: 0 20px;
+  }
+
+  .htc-result {
+    margin: 0 16px 14px;
+    padding: 10px 12px;
+  }
+
+  .htc-result-icon {
+    font-size: 18px;
+  }
+
+  .htc-result-title {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+  }
+
+  .htc-result-msg {
+    font-size: 12px;
+  }
+
+  .htc-next-btn {
+    margin: 0 16px 16px;
+    font-size: 11px;
+    padding: 11px 20px;
+  }
+
+}

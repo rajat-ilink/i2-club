@@ -10,7 +10,7 @@ import { ContactComponent } from './features/contact/contact';
 
 import { authGuard } from './core/guards/auth-guard';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout';
-import { AiAgents } from './features/ai-agents/ai-agents';
+import { AiAgentsComponent } from './features/ai-agents/ai-agents';
 
 export const routes: Routes = [
 
@@ -54,7 +54,7 @@ export const routes: Routes = [
       },
       {
         path: 'ai-agents',
-        component: AiAgents,
+        component: AiAgentsComponent,
       },
       {
         path: 'links',
