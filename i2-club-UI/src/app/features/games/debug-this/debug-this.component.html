@@ -1,0 +1,129 @@
+<div class="dt-panel" [class.dt-shaking]="shaking" role="main" aria-label="Debug This game panel">
+
+  <!-- ═══════════════════════════════════════════
+       PANEL HEADER
+       ═══════════════════════════════════════════ -->
+  <div class="dt-header">
+    <div class="dt-bug-icon" aria-hidden="true">
+      🐛
+    </div>
+    <div class="dt-header-text">
+      <div class="dt-header-top">
+        <h3 id="dt-title">DEBUG THIS</h3>
+        @if (challenge) {
+          <div class="dt-badges">
+            <span class="dt-badge dt-badge-lang">{{ challenge.language }}</span>
+            <span class="dt-badge" [class.dt-badge-easy]="challenge.difficulty === 'Easy'"
+              [class.dt-badge-medium]="challenge.difficulty === 'Medium'"
+              [class.dt-badge-hard]="challenge.difficulty === 'Hard'">
+              {{ challenge.difficulty }}
+            </span>
+          </div>
+        }
+      </div>
+      <p class="dt-header-sub">IDENTIFY THE LINE CONTAINING THE BUG</p>
+    </div>
+  </div>
+
+  @if (challenge) {
+    <!-- ═══════════════════════════════════════════
+         CODE SNIPPET DISPLAY
+         ═══════════════════════════════════════════ -->
+    <div class="dt-challenge-container">
+
+      <div class="dt-code-card">
+        <!-- Card top bar -->
+        <div class="dt-code-topbar">
+          <div class="dt-code-dots" aria-hidden="true">
+            <span class="dt-dot dt-dot-red"></span>
+            <span class="dt-dot dt-dot-yellow"></span>
+            <span class="dt-dot dt-dot-green"></span>
+          </div>
+          <span class="dt-code-filename">{{ challenge.title }}</span>
+          <span class="dt-code-lang-tag">{{ challenge.language }}</span>
+        </div>
+
+        <!-- Code lines snippet -->
+        <div class="dt-code-body" role="region" [attr.aria-label]="'Code snippet for ' + challenge.title">
+          @for (line of challenge.code; track $index; let i = $index) {
+            <div class="dt-code-row"
+              [class.dt-row-selected-wrong]="gameState === 'wrong' && selectedLine === (i + 1)"
+              [class.dt-row-selected-correct]="gameState === 'correct' && challenge.bugLine === (i + 1)">
+
+              <span class="dt-line-num">{{ padLine(i + 1) }}</span>
+              <code class="dt-line-code">{{ line }}</code>
+
+              @if (gameState === 'correct' && challenge.bugLine === (i + 1)) {
+                <span class="dt-line-bug-tag" aria-label="Bug located here">🐛 BUG</span>
+              }
+              @if (gameState === 'wrong' && selectedLine === (i + 1)) {
+                <span class="dt-line-wrong-tag" aria-label="Incorrect choice">✕</span>
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════
+           QUESTION & OPTION BUTTONS
+           ═══════════════════════════════════════════ -->
+      <div class="dt-question-section">
+        <div class="dt-question-title" id="dt-question-label">
+          <span class="dt-q-icon" aria-hidden="true">🐛</span> Which line contains the bug?
+        </div>
+
+        <div class="dt-options-grid" role="radiogroup" aria-labelledby="dt-question-label">
+          @for (opt of challenge.options; track opt) {
+            <button type="button"
+              class="dt-option-btn"
+              [class.dt-opt-wrong]="gameState === 'wrong' && selectedLine === opt"
+              [class.dt-opt-correct]="gameState === 'correct' && challenge.bugLine === opt"
+              [disabled]="gameState === 'correct'"
+              (click)="selectLine(opt)"
+              [attr.aria-label]="'Select Line ' + padLine(opt)">
+              <span class="dt-opt-label">LINE {{ padLine(opt) }}</span>
+              @if (gameState === 'correct' && challenge.bugLine === opt) {
+                <span class="dt-opt-icon">✓</span>
+              } @else if (gameState === 'wrong' && selectedLine === opt) {
+                <span class="dt-opt-icon">✕</span>
+              }
+            </button>
+          }
+        </div>
+      </div>
+
+    </div>
+  }
+
+  <!-- ═══════════════════════════════════════════
+       FEEDBACK — WRONG ANSWER
+       ═══════════════════════════════════════════ -->
+  @if (gameState === 'wrong') {
+    <div class="dt-result dt-result-wrong" role="alert" aria-live="assertive">
+      <div class="dt-result-icon" aria-hidden="true">🚫</div>
+      <div class="dt-result-body">
+        <strong class="dt-result-title">NOT THAT LINE!</strong>
+        <p class="dt-result-msg">Line {{ padLine(selectedLine!) }} does not contain the bug. Try another line!</p>
+      </div>
+    </div>
+  }
+
+  <!-- ═══════════════════════════════════════════
+       FEEDBACK — CORRECT ANSWER
+       ═══════════════════════════════════════════ -->
+  @if (gameState === 'correct' && challenge) {
+    <div class="dt-result dt-result-correct" role="alert" aria-live="assertive">
+      <div class="dt-result-icon" aria-hidden="true">🎉</div>
+      <div class="dt-result-body">
+        <strong class="dt-result-title">BUG FOUND — LINE {{ padLine(challenge.bugLine) }}!</strong>
+        <p class="dt-result-msg">{{ challenge.explanation }}</p>
+      </div>
+    </div>
+
+    <button class="dt-next-btn" type="button" (click)="nextChallenge()" aria-label="Load next challenge">
+      <span>NEXT CHALLENGE</span>
+      <span class="dt-next-icon" aria-hidden="true">→</span>
+    </button>
+  }
+
+</div>

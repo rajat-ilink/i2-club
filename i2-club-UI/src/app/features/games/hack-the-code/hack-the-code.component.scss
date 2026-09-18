@@ -140,9 +140,9 @@
 .htc-header {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
 
-  padding: 24px 28px 18px;
+  padding: 16px 22px 13px;
 
   border-bottom: 1px solid #1e1e1e;
 }
@@ -150,8 +150,8 @@
 .htc-lock-icon {
   flex-shrink: 0;
 
-  width: 44px;
-  height: 44px;
+  width: 34px;
+  height: 34px;
 
   display: flex;
   align-items: center;
@@ -160,21 +160,21 @@
   color: #e8232a;
 
   svg {
-    width: 36px;
-    height: 36px;
+    width: 28px;
+    height: 28px;
     display: block;
   }
 }
 
 .htc-header-text {
   h3 {
-    margin: 0 0 4px;
+    margin: 0 0 3px;
 
     color: #f0f0f0;
 
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 700;
-    letter-spacing: 3px;
+    letter-spacing: 2.5px;
     text-transform: uppercase;
 
     font-family: 'Segoe UI', Roboto, Arial, sans-serif;
@@ -186,9 +186,9 @@
 
   color: #e8232a;
 
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
-  letter-spacing: 2.5px;
+  letter-spacing: 2px;
   text-transform: uppercase;
 
   font-family: 'Segoe UI', Roboto, Arial, sans-serif;
@@ -200,7 +200,7 @@
 // ═══════════════════════════════════════════════════════════════
 
 .htc-clues-section {
-  padding: 20px 28px;
+  padding: 14px 22px;
   border-bottom: 1px solid #1e1e1e;
 }
 
@@ -209,11 +209,11 @@
   align-items: center;
   gap: 12px;
 
-  margin-bottom: 16px;
+  margin-bottom: 11px;
 
   color: #666666;
 
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 700;
   letter-spacing: 3px;
   text-transform: uppercase;
@@ -234,19 +234,19 @@
 
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 7px;
 }
 
 .htc-clue {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 10px;
 
-  padding: 10px 14px;
+  padding: 7px 11px;
 
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid #1e1e1e;
-  border-radius: 7px;
+  border-radius: 6px;
 
   transition: border-color 0.2s ease, background 0.2s ease;
 
@@ -269,16 +269,16 @@
   align-items: center;
   justify-content: center;
 
-  width: 28px;
-  height: 32px;
+  width: 24px;
+  height: 27px;
 
   background: #141414;
   border: 1px solid #2a2a2a;
-  border-radius: 5px;
+  border-radius: 4px;
 
   color: #cccccc;
 
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 600;
   font-family: 'Segoe UI', Roboto, monospace, sans-serif;
   letter-spacing: 0;
@@ -313,8 +313,8 @@
 
   color: #b0b0b0;
 
-  font-size: 13.5px;
-  line-height: 1.45;
+  font-size: 12px;
+  line-height: 1.4;
 
   font-family: 'Segoe UI', Roboto, Arial, sans-serif;
 }
@@ -329,15 +329,15 @@
   flex-direction: column;
   align-items: center;
 
-  padding: 24px 28px;
+  padding: 16px 22px;
 
-  gap: 20px;
+  gap: 14px;
 }
 
 .htc-input-label {
   color: #666666;
 
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 700;
   letter-spacing: 3px;
   text-transform: uppercase;
@@ -348,13 +348,13 @@
 // 4-digit input row
 .htc-digit-row {
   display: flex;
-  gap: 12px;
+  gap: 9px;
   align-items: center;
 }
 
 .htc-digit-input {
-  width: 64px;
-  height: 72px;
+  width: 54px;
+  height: 60px;
 
   background: #0d0d0d;
   border: 1.5px solid #2a2a2a;
@@ -362,7 +362,7 @@
 
   color: #f0f0f0;
 
-  font-size: 28px;
+  font-size: 23px;
   font-weight: 700;
   text-align: center;
 
@@ -432,11 +432,11 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
 
-  min-width: 220px;
-  height: 50px;
-  padding: 0 28px;
+  min-width: 190px;
+  height: 42px;
+  padding: 0 22px;
 
   background: linear-gradient(135deg, #e8232a, #b8161c);
   border: none;
@@ -444,7 +444,7 @@
 
   color: #ffffff;
 
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -498,19 +498,19 @@
 .htc-result {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 11px;
 
-  margin: 0 28px 20px;
-  padding: 14px 18px;
+  margin: 0 22px 14px;
+  padding: 11px 14px;
 
-  border-radius: 8px;
+  border-radius: 7px;
   border: 1px solid transparent;
 
   animation: htc-fade-in 0.35s ease forwards;
 }
 
 .htc-result-icon {
-  font-size: 22px;
+  font-size: 18px;
   flex-shrink: 0;
 }
 
@@ -523,21 +523,21 @@
 
   color: #f0f0f0;
 
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 2px;
   text-transform: uppercase;
 
   font-family: 'Segoe UI', Roboto, Arial, sans-serif;
 
-  margin-bottom: 3px;
+  margin-bottom: 2px;
 }
 
 .htc-result-msg {
   margin: 0;
 
-  font-size: 13px;
-  line-height: 1.45;
+  font-size: 11.5px;
+  line-height: 1.4;
 
   font-family: 'Segoe UI', Roboto, Arial, sans-serif;
 }
@@ -570,10 +570,10 @@
 .htc-next-btn {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 
-  margin: 0 28px 28px;
-  padding: 12px 24px;
+  margin: 0 22px 20px;
+  padding: 9px 18px;
 
   background: transparent;
   border: 1.5px solid #22c55e;
@@ -581,7 +581,7 @@
 
   color: #22c55e;
 
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 700;
   letter-spacing: 2px;
   text-transform: uppercase;

@@ -1,5 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { GamesComponent } from '../games/games.component';
+import { Router } from '@angular/router';
 
 interface InfoSection {
   heading: string;
@@ -95,9 +96,14 @@ interface EventModalContent {
 })
 export class HomeComponent {
 
+  constructor(private router: Router) { }
+
   @ViewChild('cardTrack') cardTrack!: ElementRef<HTMLDivElement>;
 
   selectedEvent: HackathonEvent | null = null;
+
+  /** Controls the AI Playground modal overlay */
+  isPlaygroundOpen = false;
 
   hackathonEvents: HackathonEvent[] = [
     {
@@ -386,11 +392,18 @@ export class HomeComponent {
   }
 
   joinNow(): void {
-    // hook up routing or modal here
+    this.router.navigate(['/login']);
   }
 
   explore(): void {
-    // hook up routing or scroll-to-section here
+    const section = document.getElementById('company-about');
+
+    if (section) {
+      section.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
   }
 
   submitIdea(): void {
@@ -398,6 +411,12 @@ export class HomeComponent {
   }
 
   playChallenge(): void {
-    // Add AI Challenge functionality later
+    this.isPlaygroundOpen = true;
+    document.body.style.overflow = 'hidden';
+  }
+
+  closePlayground(): void {
+    this.isPlaygroundOpen = false;
+    document.body.style.overflow = '';
   }
 }

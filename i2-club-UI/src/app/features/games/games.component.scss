@@ -36,6 +36,13 @@
   border-top: 1px solid #292929;
 }
 
+// When rendered inside the AI Playground modal overlay,
+// the host provides its own container chrome.
+.games-section--modal {
+  padding-top: 0;
+  border-top: none;
+}
+
 
 // ─── Section Header ────────────────────────────────────────────
 
@@ -306,16 +313,16 @@
   position: relative;
 
   width: 100%;
-  max-width: 760px;
+  max-width: 660px;
 
-  max-height: calc(100vh - 48px);
+  max-height: 78vh;
 
   display: flex;
   flex-direction: column;
 
   background: #0d0d0d;
   border: 1px solid #2a2a2a;
-  border-radius: 14px;
+  border-radius: 12px;
   overflow: hidden;
 
   box-shadow:
@@ -333,9 +340,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 12px;
 
-  padding: 18px 22px 18px 24px;
+  padding: 13px 16px 13px 20px;
 
   background: rgba(232, 35, 42, 0.05);
   border-bottom: 1px solid #1e1e1e;
@@ -344,29 +351,29 @@
 .game-modal-title-group {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 10px;
 }
 
 .game-modal-icon {
-  font-size: 28px;
+  font-size: 22px;
   line-height: 1;
   flex-shrink: 0;
 }
 
 .game-modal-tag {
   color: #e8232a;
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 700;
-  letter-spacing: 2px;
+  letter-spacing: 1.8px;
   text-transform: uppercase;
   font-family: 'Segoe UI', Roboto, Arial, sans-serif;
-  margin-bottom: 3px;
+  margin-bottom: 2px;
 }
 
 .game-modal-title {
   margin: 0;
   color: #f0f0f0;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 700;
   letter-spacing: -0.2px;
   font-family: 'Segoe UI', Roboto, Arial, sans-serif;
