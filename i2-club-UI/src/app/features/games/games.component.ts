@@ -2,6 +2,7 @@ import { Component, HostListener, Input, Type } from '@angular/core';
 import { CommonModule, NgComponentOutlet } from '@angular/common';
 import { HackTheCodeComponent } from './hack-the-code/hack-the-code.component';
 import { DebugThisComponent } from './debug-this/debug-this.component';
+import { PatternBreakerComponent } from './pattern-breaker/pattern-breaker.component';
 
 /**
  * Defines the data for each game card shown in the AI Playground grid.
@@ -42,6 +43,16 @@ const GAME_REGISTRY: GameCard[] = [
       'Spot the single line containing the bug in short code snippets across Python, JS, TypeScript, SQL & more.',
     difficulty: 'Easy',
     component: DebugThisComponent
+  },
+  {
+    id: 'pattern-breaker',
+    icon: '🧠',
+    name: 'Pattern Breaker',
+    tag: 'Sequence',
+    description:
+      'Find the hidden rule and predict what comes next in mathematical and logical sequence challenges.',
+    difficulty: 'Medium',
+    component: PatternBreakerComponent
   }
 ];
 

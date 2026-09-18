@@ -1,0 +1,125 @@
+<div class="pb-panel" [class.pb-shaking]="shaking" role="main" aria-label="Pattern Breaker game panel">
+
+  <!-- ═══════════════════════════════════════════
+       PANEL HEADER
+       ═══════════════════════════════════════════ -->
+  <div class="pb-header">
+    <div class="pb-brain-icon" aria-hidden="true">
+      🧠
+    </div>
+    <div class="pb-header-text">
+      <div class="pb-header-top">
+        <h3 id="pb-title">PATTERN BREAKER</h3>
+        @if (puzzle) {
+          <span class="pb-badge pb-badge-medium">Medium</span>
+        }
+      </div>
+      <p class="pb-header-sub">FIND THE PATTERN. CRACK THE SEQUENCE.</p>
+    </div>
+  </div>
+
+  @if (puzzle) {
+    <!-- ═══════════════════════════════════════════
+         SEQUENCE DISPLAY CARD
+         ═══════════════════════════════════════════ -->
+    <div class="pb-challenge-container">
+
+      <div class="pb-sequence-card">
+        <div class="pb-sequence-topbar">
+          <span class="pb-sequence-title">{{ puzzle.title }}</span>
+          <span class="pb-sequence-tag">Logic Sequence</span>
+        </div>
+
+        <!-- Sequence Row: Item → Arrow → Item → Arrow ... -->
+        <div class="pb-sequence-body" role="region" [attr.aria-label]="'Sequence for ' + puzzle.title">
+          <div class="pb-sequence-row">
+            @for (item of puzzle.sequence; track $index; let i = $index; let last = $last) {
+              <div class="pb-seq-item"
+                [class.pb-seq-target]="item === '?'"
+                [class.pb-seq-correct]="item === '?' && gameState === 'correct'"
+                [class.pb-seq-wrong]="item === '?' && gameState === 'wrong'">
+                
+                <span class="pb-seq-value">
+                  @if (item === '?' && gameState === 'correct') {
+                    {{ puzzle.correctAnswer }}
+                  } @else {
+                    {{ item }}
+                  }
+                </span>
+
+                @if (item === '?' && gameState === 'correct') {
+                  <span class="pb-seq-check" aria-hidden="true">✓</span>
+                }
+              </div>
+
+              @if (!last) {
+                <span class="pb-seq-arrow" aria-hidden="true">→</span>
+              }
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════
+           QUESTION & 4 SELECTABLE OPTIONS
+           ═══════════════════════════════════════════ -->
+      <div class="pb-question-section">
+        <div class="pb-question-title" id="pb-question-label">
+          <span class="pb-q-icon" aria-hidden="true">❓</span> {{ puzzle.question }}
+        </div>
+
+        <div class="pb-options-grid" role="radiogroup" aria-labelledby="pb-question-label">
+          @for (opt of puzzle.options; track opt) {
+            <button type="button"
+              class="pb-option-btn"
+              [class.pb-opt-wrong]="gameState === 'wrong' && selectedOption === opt"
+              [class.pb-opt-correct]="gameState === 'correct' && puzzle.correctAnswer === opt"
+              [disabled]="gameState === 'correct'"
+              (click)="selectOption(opt)"
+              [attr.aria-label]="'Select option ' + opt">
+              <span class="pb-opt-val">{{ opt }}</span>
+              @if (gameState === 'correct' && puzzle.correctAnswer === opt) {
+                <span class="pb-opt-icon">✓</span>
+              } @else if (gameState === 'wrong' && selectedOption === opt) {
+                <span class="pb-opt-icon">✕</span>
+              }
+            </button>
+          }
+        </div>
+      </div>
+
+    </div>
+  }
+
+  <!-- ═══════════════════════════════════════════
+       FEEDBACK — WRONG ANSWER
+       ═══════════════════════════════════════════ -->
+  @if (gameState === 'wrong') {
+    <div class="pb-result pb-result-wrong" role="alert" aria-live="assertive">
+      <div class="pb-result-icon" aria-hidden="true">✕</div>
+      <div class="pb-result-body">
+        <strong class="pb-result-title">INCORRECT PATTERN</strong>
+        <p class="pb-result-msg">Option {{ selectedOption }} does not fit the pattern. Think again!</p>
+      </div>
+    </div>
+  }
+
+  <!-- ═══════════════════════════════════════════
+       FEEDBACK — CORRECT ANSWER
+       ═══════════════════════════════════════════ -->
+  @if (gameState === 'correct' && puzzle) {
+    <div class="pb-result pb-result-correct" role="alert" aria-live="assertive">
+      <div class="pb-result-icon" aria-hidden="true">✓</div>
+      <div class="pb-result-body">
+        <strong class="pb-result-title">CORRECT!</strong>
+        <p class="pb-result-msg">{{ puzzle.explanation }}</p>
+      </div>
+    </div>
+
+    <button class="pb-next-btn" type="button" (click)="nextPattern()" aria-label="Load next pattern">
+      <span>NEXT PATTERN</span>
+      <span class="pb-next-icon" aria-hidden="true">→</span>
+    </button>
+  }
+
+</div>
