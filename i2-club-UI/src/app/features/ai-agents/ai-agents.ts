@@ -18,6 +18,13 @@ interface AIAgent {
   icon: string;
 }
 
+export interface AgentDetails {
+  problemItSolves: string;
+  howItWorks: string;
+  expectedOutput: string;
+  keyBenefits: string[];
+}
+
 interface SuggestFormData {
   name: string;
   email: string;
@@ -58,6 +65,9 @@ export class AiAgentsComponent {
   // ── Modal state ──────────────────────────────────────────────────────────
   isSuggestModalOpen = false;
   isRequestModalOpen = false;
+  isExploreModalOpen = false;
+  selectedExploreAgent: AIAgent | null = null;
+  selectedExploreAgentDetails: AgentDetails | null = null;
 
   isSuggestSending = false;
   isRequestSending = false;
@@ -238,6 +248,44 @@ export class AiAgentsComponent {
 
   clearSearch(): void {
     this.searchTerm = '';
+  }
+
+  // ── Explore modal ────────────────────────────────────────────────────────
+  openExploreModal(agent: AIAgent): void {
+    this.selectedExploreAgent = agent;
+    this.selectedExploreAgentDetails = this.getAgentDetails(agent.name);
+    this.isExploreModalOpen = true;
+    document.body.style.overflow = 'hidden';
+  }
+
+  closeExploreModal(): void {
+    this.isExploreModalOpen = false;
+    this.selectedExploreAgent = null;
+    this.selectedExploreAgentDetails = null;
+    document.body.style.overflow = '';
+  }
+
+  requestFromExplore(agentName: string): void {
+    this.closeExploreModal();
+    this.openRequestModal(agentName);
+  }
+
+  getAgentDetails(agentName: string): AgentDetails | null {
+    if (agentName.toLowerCase().includes('feedback agent')) {
+      return {
+        problemItSolves:
+          'Recruiters spend hours manually reviewing interview transcripts, drafting evaluation notes, and assigning skill ratings. Unstructured manual reviews introduce subjectivity and evaluation bias across hiring teams. Manual updates to Applicant Tracking Systems (ATS) cause operational delays .',
+        howItWorks:
+          'The system automates the post-interview evaluation pipeline end-to-end by having HR initiate a Microsoft Teams meeting via a custom app integrated with Zoho Recruit IDs to record, stream, and generate real-time transcripts. Upon completion of the interview, backend services trigger the iGentic Agent via API to parse the transcript using role-specific rubrics, extracting key quotes and timestamps to construct objective 1–5 numerical skill ratings alongside structured feedback notes. Recruiters can then review, edit, or regenerate these AI-drafted evaluation reports directly within their chat interface (such as WhatsApp or Teams) before syncing the finalized feedback and candidate status to Zoho Recruit with a single click.',
+        expectedOutput:
+          'The system delivers pre-drafted, structured candidate evaluation reports directly inside chat interfaces, complete with objective 1–5 numerical skill ratings backed by exact transcript quotes and timestamps. Additionally, it provides seamless, single-click synchronization of all completed feedback notes, scorecards, and updated candidate pipeline statuses straight into Zoho Recruit.',
+        keyBenefits: [
+          'Time Savings & Efficiency: Eliminates manual transcript reading and report drafting by instantly generating structured evaluations for recruiters.',
+          'Standardized Evaluation: Minimizes hiring bias by enforcing consistent, evidence-backed scoring metrics across all candidate interviews.'
+        ]
+      };
+    }
+    return null;
   }
 
   // ── Suggest modal ────────────────────────────────────────────────────────

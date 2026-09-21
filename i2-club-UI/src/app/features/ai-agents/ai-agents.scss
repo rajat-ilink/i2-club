@@ -1836,4 +1836,201 @@
 
 .toast-close:hover {
     color: #e8232a;
+}
+
+
+/* =========================================================
+   EXPLORE AGENT MODAL STYLES
+   ========================================================= */
+
+.explore-modal-panel {
+    max-width: 960px;
+    padding: 0;
+    overflow: hidden;
+    background: #0d0d0d;
+    border: 1px solid #282828;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+}
+
+.explore-branding-bar {
+    background: linear-gradient(90deg, #c91d23, #e8232a);
+    padding: 14px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .branding-logo {
+        font-family: system-ui, -apple-system, sans-serif;
+        font-size: 26px;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+
+        .logo-i {
+            color: #ffffff;
+        }
+
+        .logo-gentic {
+            color: #ffffff;
+            font-weight: 700;
+            margin-left: 2px;
+        }
+    }
+
+    .explore-close {
+        color: #ffffff;
+        border-color: rgba(255, 255, 255, 0.3);
+        background: rgba(0, 0, 0, 0.15);
+
+        &:hover {
+            background: rgba(0, 0, 0, 0.35);
+            color: #ffffff;
+            border-color: #ffffff;
+        }
+    }
+}
+
+.explore-title-banner {
+    background: #141414;
+    padding: 22px 28px;
+    border-bottom: 1px solid #222222;
+
+    h2 {
+        margin: 0;
+        color: #ffffff;
+        font-size: 28px;
+        font-weight: 700;
+        letter-spacing: -0.3px;
+    }
+}
+
+.explore-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    padding: 28px;
+    overflow-y: auto;
+    max-height: calc(85vh - 200px);
+
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        padding: 20px;
+        gap: 20px;
+    }
+}
+
+.explore-col {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.explore-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.explore-section-title {
+    margin: 0;
+    color: #e8232a;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.explore-card {
+    border-radius: 6px;
+    padding: 18px 20px;
+    font-size: 13.5px;
+    line-height: 1.65;
+}
+
+.explore-card-light {
+    background: #eef0f2;
+    color: #1a1a1a;
+    border: 1px solid #dcdfe3;
+
+    p {
+        margin: 0;
+        color: #1f2428;
+        font-weight: 450;
+    }
+}
+
+.explore-card-dark {
+    background: #141414;
+    color: #e5e5e5;
+    border: 1px solid #242424;
+
+    p {
+        margin: 0;
+        color: #d1d5db;
+        font-weight: 400;
+    }
+}
+
+.explore-placeholder-card {
+    min-height: 90px;
+    display: flex;
+    align-items: center;
+}
+
+.placeholder-text {
+    color: #787d82 !important;
+    font-style: italic;
+    font-size: 13px;
+    margin: 0;
+}
+
+.benefits-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    li {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        color: #d1d5db;
+        font-size: 13px;
+        line-height: 1.6;
+
+        .benefit-sq {
+            width: 10px;
+            height: 10px;
+            background: #e8232a;
+            flex-shrink: 0;
+            margin-top: 5px;
+        }
+    }
+}
+
+.yet-to-be-added-banner {
+    margin: 0 28px 10px;
+    padding: 12px 18px;
+    background: rgba(232, 35, 42, 0.08);
+    border: 1px dashed rgba(232, 35, 42, 0.35);
+    border-radius: 7px;
+    color: #e8232a;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+}
+
+.explore-modal-footer {
+    padding: 18px 28px;
+    background: #111111;
+    border-top: 1px solid #222222;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 14px;
 }

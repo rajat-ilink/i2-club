@@ -3,7 +3,7 @@
   <!-- ═══════════════════════════════════════════════
        SECTION HEADER
        ═══════════════════════════════════════════════ -->
-  <div class="games-header">
+  <!-- <div class="games-header">
 
     <div class="games-label">
       <span class="games-label-line"></span>
@@ -20,7 +20,7 @@
       Test your problem-solving skills with our interactive AI challenges.
     </p>
 
-  </div>
+  </div> -->
 
 
   <!-- ═══════════════════════════════════════════════
@@ -31,43 +31,37 @@
 
     @for (game of games; track game.id) {
 
-      <button
-        class="game-card"
-        type="button"
-        role="listitem"
-        [attr.aria-label]="'Play ' + game.name"
-        (click)="openGame(game)"
-      >
-        <!-- Top accent line (visible on hover) -->
-        <div class="game-card-accent" aria-hidden="true"></div>
+    <button class="game-card" type="button" role="listitem" [attr.aria-label]="'Play ' + game.name"
+      (click)="openGame(game)">
+      <!-- Top accent line (visible on hover) -->
+      <div class="game-card-accent" aria-hidden="true"></div>
 
-        <!-- Icon -->
-        <div class="game-card-icon" aria-hidden="true">
-          {{ game.icon }}
-        </div>
+      <!-- Icon -->
+      <div class="game-card-icon" aria-hidden="true">
+        {{ game.icon }}
+      </div>
 
-        <!-- Tag -->
-        <div class="game-card-tag">{{ game.tag }}</div>
+      <!-- Tag -->
+      <div class="game-card-tag">{{ game.tag }}</div>
 
-        <!-- Name -->
-        <h3 class="game-card-name">{{ game.name }}</h3>
+      <!-- Name -->
+      <h3 class="game-card-name">{{ game.name }}</h3>
 
-        <!-- Description -->
-        <p class="game-card-desc">{{ game.description }}</p>
+      <!-- Description -->
+      <p class="game-card-desc">{{ game.description }}</p>
 
-        <!-- Footer -->
-        <div class="game-card-footer">
-          <span class="game-card-difficulty"
-                [ngClass]="'diff-' + game.difficulty.toLowerCase()">
-            {{ game.difficulty }}
-          </span>
-          <span class="game-card-play-cta">
-            Play Now
-            <span class="game-card-arrow" aria-hidden="true">→</span>
-          </span>
-        </div>
+      <!-- Footer -->
+      <div class="game-card-footer">
+        <span class="game-card-difficulty" [ngClass]="'diff-' + game.difficulty.toLowerCase()">
+          {{ game.difficulty }}
+        </span>
+        <span class="game-card-play-cta">
+          Play Now
+          <span class="game-card-arrow" aria-hidden="true">→</span>
+        </span>
+      </div>
 
-      </button>
+    </button>
 
     }
 
@@ -83,46 +77,36 @@
      ═══════════════════════════════════════════════════════════════ -->
 @if (activeGame) {
 
-  <div
-    class="game-modal-overlay"
-    role="dialog"
-    [attr.aria-modal]="true"
-    [attr.aria-label]="activeGame.name + ' game'"
-    (click)="closeModal()"
-  >
-    <div class="game-modal" (click)="$event.stopPropagation()">
+<div class="game-modal-overlay" role="dialog" [attr.aria-modal]="true" [attr.aria-label]="activeGame.name + ' game'"
+  (click)="closeModal()">
+  <div class="game-modal" (click)="$event.stopPropagation()">
 
-      <!-- Modal Header -->
-      <div class="game-modal-header">
+    <!-- Modal Header -->
+    <div class="game-modal-header">
 
-        <div class="game-modal-title-group">
-          <span class="game-modal-icon" aria-hidden="true">{{ activeGame.icon }}</span>
-          <div>
-            <div class="game-modal-tag">{{ activeGame.tag }}</div>
-            <h2 class="game-modal-title">{{ activeGame.name }}</h2>
-          </div>
+      <div class="game-modal-title-group">
+        <span class="game-modal-icon" aria-hidden="true">{{ activeGame.icon }}</span>
+        <div>
+          <div class="game-modal-tag">{{ activeGame.tag }}</div>
+          <h2 class="game-modal-title">{{ activeGame.name }}</h2>
         </div>
-
-        <button
-          class="game-modal-close"
-          type="button"
-          aria-label="Close game"
-          (click)="closeModal()"
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-               stroke-linecap="round" aria-hidden="true">
-            <path d="M18 6 6 18M6 6l12 12"/>
-          </svg>
-        </button>
-
       </div>
 
-      <!-- Dynamic Game Content -->
-      <div class="game-modal-body">
-        <ng-container [ngComponentOutlet]="activeGame.component"></ng-container>
-      </div>
+      <button class="game-modal-close" type="button" aria-label="Close game" (click)="closeModal()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          aria-hidden="true">
+          <path d="M18 6 6 18M6 6l12 12" />
+        </svg>
+      </button>
 
     </div>
+
+    <!-- Dynamic Game Content -->
+    <div class="game-modal-body">
+      <ng-container [ngComponentOutlet]="activeGame.component"></ng-container>
+    </div>
+
   </div>
+</div>
 
 }

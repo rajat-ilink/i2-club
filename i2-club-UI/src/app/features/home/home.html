@@ -1272,46 +1272,38 @@
      ═══════════════════════════════════════════════════════════════════ -->
 @if (isPlaygroundOpen) {
 
-  <div
-    class="playground-overlay"
-    role="dialog"
-    aria-modal="true"
-    aria-label="AI Playground"
-    (click)="closePlayground()"
-  >
-    <div class="playground-modal" (click)="$event.stopPropagation()">
+<div class="playground-overlay" role="dialog" aria-modal="true" aria-label="AI Playground" (click)="closePlayground()">
+  <div class="playground-modal" (click)="$event.stopPropagation()">
 
-      <!-- ── Modal header ── -->
-      <div class="playground-modal-header">
+    <!-- ── Modal header ── -->
+    <div class="playground-modal-header">
 
-        <div class="playground-modal-title">
-          <div class="playground-modal-eyebrow">
-            <span class="playground-modal-eyebrow-line"></span>
-            <span>AI PLAYGROUND</span>
-          </div>
-          <h2>The AI Playground</h2>
+      <div class="playground-modal-title">
+        <div class="playground-modal-eyebrow">
+          <span class="playground-modal-eyebrow-line"></span>
+          <span>AI PLAYGROUND</span>
         </div>
-
-        <button
-          class="playground-modal-close"
-          type="button"
-          aria-label="Close AI Playground"
-          (click)="closePlayground()"
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-               stroke-linecap="round" aria-hidden="true">
-            <path d="M18 6 6 18M6 6l12 12"/>
-          </svg>
-        </button>
-
+        <h2>The AI Playground</h2>
+        <p class="playground-modal-games-subtitle">
+          Think. Hack. Solve.
+        </p>
       </div>
 
-      <!-- ── Games content (modal mode strips page-level chrome) ── -->
-      <div class="playground-modal-body">
-        <app-games mode="modal"></app-games>
-      </div>
+      <button class="playground-modal-close" type="button" aria-label="Close AI Playground" (click)="closePlayground()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          aria-hidden="true">
+          <path d="M18 6 6 18M6 6l12 12" />
+        </svg>
+      </button>
 
     </div>
+
+    <!-- ── Games content (modal mode strips page-level chrome) ── -->
+    <div class="playground-modal-body">
+      <app-games mode="modal"></app-games>
+    </div>
+
   </div>
+</div>
 
 }
