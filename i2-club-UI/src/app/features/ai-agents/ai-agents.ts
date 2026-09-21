@@ -1,11 +1,45 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, NgZone } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import emailjs from '@emailjs/browser';
+
+// ─── EmailJS Credentials ────────────────────────────────────────────────────
+// Replace these with your actual EmailJS credentials from https://emailjs.com
+const EMAILJS_PUBLIC_KEY = '0sS3H19hocpTolKfM';
+const SUGGEST_SERVICE_ID = 'service_9n3e318';
+const SUGGEST_TEMPLATE_ID = 'template_1qa4c6t';
+const REQUEST_SERVICE_ID = 'service_sjq0uqc';
+const REQUEST_TEMPLATE_ID = 'template_ge8g44p';
+// ────────────────────────────────────────────────────────────────────────────
 
 interface AIAgent {
   name: string;
   description: string;
   category: string;
   icon: string;
+}
+
+interface SuggestFormData {
+  name: string;
+  email: string;
+  department: string;
+  problem: string;
+  agentAction: string;
+  benefit: string;
+  users: number | null;
+  tools: string;
+  details: string;
+}
+
+interface RequestFormData {
+  name: string;
+  email: string;
+  department: string;
+  selectedAgent: string;
+  purpose: string;
+  users: number | null;
+  benefit: string;
+  access: string;
+  comments: string;
 }
 
 @Component({
@@ -17,8 +51,30 @@ interface AIAgent {
 })
 export class AiAgentsComponent {
 
+  constructor(private ngZone: NgZone, private cdr: ChangeDetectorRef) {}
+
   searchTerm = '';
 
+  // ── Modal state ──────────────────────────────────────────────────────────
+  isSuggestModalOpen = false;
+  isRequestModalOpen = false;
+
+  isSuggestSending = false;
+  isRequestSending = false;
+
+  suggestError = '';
+  requestError = '';
+
+  // ── Toast state ──────────────────────────────────────────────────────────
+  toastVisible = false;
+  toastMessage = '';
+  private toastTimer: ReturnType<typeof setTimeout> | null = null;
+
+  // ── Form data ────────────────────────────────────────────────────────────
+  suggestData: SuggestFormData = this.freshSuggestData();
+  requestData: RequestFormData = this.freshRequestData();
+
+  // ── Agent list ───────────────────────────────────────────────────────────
   agents: AIAgent[] = [
     {
       name: 'AI Work Assignment Engine',
@@ -169,13 +225,10 @@ export class AiAgentsComponent {
     }
   ];
 
+  // ── Filtered agents ──────────────────────────────────────────────────────
   get filteredAgents(): AIAgent[] {
     const term = this.searchTerm.trim().toLowerCase();
-
-    if (!term) {
-      return this.agents;
-    }
-
+    if (!term) return this.agents;
     return this.agents.filter(agent =>
       agent.name.toLowerCase().includes(term) ||
       agent.description.toLowerCase().includes(term) ||
@@ -185,5 +238,156 @@ export class AiAgentsComponent {
 
   clearSearch(): void {
     this.searchTerm = '';
+  }
+
+  // ── Suggest modal ────────────────────────────────────────────────────────
+  openSuggestModal(): void {
+    this.isSuggestModalOpen = true;
+    // this.suggestSubmitted = false;
+    this.suggestError = '';
+    this.suggestData = this.freshSuggestData();
+    document.body.style.overflow = 'hidden';
+  }
+
+  closeSuggestModal(): void {
+    this.isSuggestModalOpen = false;
+    document.body.style.overflow = '';
+  }
+
+  async submitSuggestForm(): Promise<void> {
+    if (!this.suggestData.name || !this.suggestData.email ||
+      !this.suggestData.department || !this.suggestData.problem ||
+      !this.suggestData.agentAction || !this.suggestData.benefit) {
+      this.suggestError = 'Please fill in all required fields.';
+      return;
+    }
+
+    this.isSuggestSending = true;
+    this.suggestError = '';
+
+    const templateParams = {
+      from_name: this.suggestData.name,
+      from_email: this.suggestData.email,
+      department: this.suggestData.department,
+      problem: this.suggestData.problem,
+      agent_action: this.suggestData.agentAction,
+      benefit: this.suggestData.benefit,
+      users: this.suggestData.users ?? 'Not specified',
+      tools: this.suggestData.tools || 'Not specified',
+      details: this.suggestData.details || 'N/A',
+    };
+
+    emailjs
+      .send(SUGGEST_SERVICE_ID, SUGGEST_TEMPLATE_ID, templateParams, EMAILJS_PUBLIC_KEY)
+      .then(() => {
+        this.ngZone.run(() => {
+          this.isSuggestSending = false;
+          this.closeSuggestModal();
+          this.showToast('✓ Your agent suggestion has been submitted successfully!');
+          this.cdr.detectChanges();
+        });
+      })
+      .catch((err) => {
+        this.ngZone.run(() => {
+          console.error('EmailJS error:', err);
+          this.isSuggestSending = false;
+          this.suggestError = 'Failed to send. Please try again or contact us directly.';
+          this.cdr.detectChanges();
+        });
+      });
+  }
+
+  // ── Request modal ────────────────────────────────────────────────────────
+  openRequestModal(preselectedAgent?: string): void {
+    this.isRequestModalOpen = true;
+    this.requestError = '';
+    this.requestData = this.freshRequestData();
+    if (preselectedAgent) {
+      this.requestData.selectedAgent = preselectedAgent;
+    }
+    document.body.style.overflow = 'hidden';
+  }
+
+  closeRequestModal(): void {
+    this.isRequestModalOpen = false;
+    document.body.style.overflow = '';
+  }
+
+  async submitRequestForm(): Promise<void> {
+    if (!this.requestData.name || !this.requestData.email ||
+      !this.requestData.department || !this.requestData.selectedAgent ||
+      !this.requestData.purpose || !this.requestData.users ||
+      !this.requestData.benefit) {
+      this.requestError = 'Please fill in all required fields.';
+      return;
+    }
+
+    this.isRequestSending = true;
+    this.requestError = '';
+
+    const templateParams = {
+      from_name: this.requestData.name,
+      from_email: this.requestData.email,
+      department: this.requestData.department,
+      selected_agent: this.requestData.selectedAgent,
+      purpose: this.requestData.purpose,
+      users: this.requestData.users,
+      benefit: this.requestData.benefit,
+      access: this.requestData.access || 'Not specified',
+      comments: this.requestData.comments || 'N/A',
+    };
+
+    emailjs
+      .send(REQUEST_SERVICE_ID, REQUEST_TEMPLATE_ID, templateParams, EMAILJS_PUBLIC_KEY)
+      .then(() => {
+        this.ngZone.run(() => {
+          this.isRequestSending = false;
+          this.closeRequestModal();
+          this.showToast('✓ Your agent request has been submitted successfully!');
+          this.cdr.detectChanges();
+        });
+      })
+      .catch((err) => {
+        this.ngZone.run(() => {
+          console.error('EmailJS error:', err);
+          this.isRequestSending = false;
+          this.requestError = 'Failed to send. Please try again or contact us directly.';
+          this.cdr.detectChanges();
+        });
+      });
+  }
+
+  // ── Toast ────────────────────────────────────────────────────────────────
+  showToast(message: string, duration = 4000): void {
+    if (this.toastTimer) clearTimeout(this.toastTimer);
+    this.toastMessage = message;
+    this.toastVisible = true;
+    this.cdr.detectChanges();
+    this.toastTimer = setTimeout(() => {
+      this.ngZone.run(() => {
+        this.toastVisible = false;
+        this.cdr.detectChanges();
+      });
+    }, duration);
+  }
+
+  dismissToast(): void {
+    this.toastVisible = false;
+    if (this.toastTimer) clearTimeout(this.toastTimer);
+  }
+
+  // ── Helpers ──────────────────────────────────────────────────────────────
+  private freshSuggestData(): SuggestFormData {
+    return {
+      name: '', email: '', department: '', problem: '',
+      agentAction: '', benefit: '', users: null, tools: '', details: ''
+    };
+  }
+
+  private freshRequestData(): RequestFormData {
+    return {
+      name: '', email: '', department: '', selectedAgent: '',
+      purpose: '', users: null, benefit: '', access: '', comments: ''
+    };
   }
 }

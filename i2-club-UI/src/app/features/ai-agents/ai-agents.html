@@ -28,6 +28,11 @@
                 unlock insights and help teams work smarter.
             </p>
 
+            <button type="button" class="agents-suggest-btn" (click)="openSuggestModal()">
+                <span>Suggest a New Agent</span>
+                <span>→</span>
+            </button>
+
         </div>
 
         <div class="hero-agent-orbit">
@@ -71,14 +76,10 @@
                 </p>
             </div>
 
-
-            <div class="agent-count">
-
-                <strong>{{ agents.length }}</strong>
-
-                <span>AI AGENTS</span>
-
-            </div>
+            <button type="button" class="agents-suggest-btn" (click)="openRequestModal()">
+                <span>Request an Agent</span>
+                <span>→</span>
+            </button>
 
         </div>
 
@@ -121,7 +122,7 @@
             let i = $index
             ) {
 
-            <article class="agent-card">
+            <article class="agent-card" (click)="openRequestModal(agent.name)">
 
                 <div class="agent-card-top">
 
@@ -153,7 +154,7 @@
 
                 <div class="agent-card-footer">
 
-                    <span>Explore agent</span>
+                    <span>Request agent</span>
 
                     <span class="agent-arrow">
                         →
@@ -230,5 +231,311 @@
         </div>
 
     </section>
+
+
+    <!-- =====================================================
+       SUGGEST A NEW AGENT MODAL
+       ===================================================== -->
+
+    @if (isSuggestModalOpen) {
+    <div class="modal-overlay" (click)="closeSuggestModal()" role="dialog" aria-modal="true"
+        aria-labelledby="suggest-modal-title">
+
+        <div class="modal-panel" (click)="$event.stopPropagation()">
+
+            <!-- Header -->
+            <div class="modal-header">
+                <div class="modal-header-left">
+                    <div class="modal-icon">✦</div>
+                    <div>
+                        <div class="modal-tag">AGENT SUGGESTION</div>
+                        <h2 id="suggest-modal-title">Suggest a New Agent</h2>
+                    </div>
+                </div>
+                <button class="modal-close" type="button" (click)="closeSuggestModal()" aria-label="Close modal">
+                    ✕
+                </button>
+            </div>
+
+            <p class="modal-subtitle">
+                Have an idea for an AI agent? Share it with us and help shape the future of i² CLUB.
+            </p>
+
+            <!-- Form -->
+            <form class="modal-form" (ngSubmit)="submitSuggestForm()" #suggestForm="ngForm" novalidate>
+
+                <!-- Row: Name & Email -->
+                <div class="form-row two-col">
+                    <div class="form-field" [class.field-error]="suggestName.invalid && suggestName.touched">
+                        <label for="s-name">Full Name <span class="req">*</span></label>
+                        <input id="s-name" type="text" name="suggestName" [(ngModel)]="suggestData.name"
+                            #suggestName="ngModel" required placeholder="e.g. John Smith" />
+                        @if (suggestName.invalid && suggestName.touched) {
+                        <span class="error-msg">Name is required</span>
+                        }
+                    </div>
+                    <div class="form-field" [class.field-error]="suggestEmail.invalid && suggestEmail.touched">
+                        <label for="s-email">Email Address <span class="req">*</span></label>
+                        <input id="s-email" type="email" name="suggestEmail" [(ngModel)]="suggestData.email"
+                            #suggestEmail="ngModel" required email placeholder="you@company.com" />
+                        @if (suggestEmail.invalid && suggestEmail.touched) {
+                        <span class="error-msg">Valid email is required</span>
+                        }
+                    </div>
+                </div>
+
+                <!-- Department -->
+                <div class="form-field" [class.field-error]="suggestDept.invalid && suggestDept.touched">
+                    <label for="s-dept">Department / Business Unit <span class="req">*</span></label>
+                    <input id="s-dept" type="text" name="suggestDept" [(ngModel)]="suggestData.department"
+                        #suggestDept="ngModel" required placeholder="e.g. HR, Finance, Operations" />
+                    @if (suggestDept.invalid && suggestDept.touched) {
+                    <span class="error-msg">Department is required</span>
+                    }
+                </div>
+
+                <!-- Problem / Use Case -->
+                <div class="form-field" [class.field-error]="suggestProblem.invalid && suggestProblem.touched">
+                    <label for="s-problem">Problem / Use Case <span class="req">*</span></label>
+                    <textarea id="s-problem" name="suggestProblem" [(ngModel)]="suggestData.problem"
+                        #suggestProblem="ngModel" required rows="3"
+                        placeholder="Describe the problem or opportunity you want the agent to address..."></textarea>
+                    @if (suggestProblem.invalid && suggestProblem.touched) {
+                    <span class="error-msg">This field is required</span>
+                    }
+                </div>
+
+                <!-- What should the agent do -->
+                <div class="form-field" [class.field-error]="suggestAction.invalid && suggestAction.touched">
+                    <label for="s-action">What should the Agent do? <span class="req">*</span></label>
+                    <textarea id="s-action" name="suggestAction" [(ngModel)]="suggestData.agentAction"
+                        #suggestAction="ngModel" required rows="3"
+                        placeholder="Describe the key tasks, decisions, or outputs you expect from the agent..."></textarea>
+                    @if (suggestAction.invalid && suggestAction.touched) {
+                    <span class="error-msg">This field is required</span>
+                    }
+                </div>
+
+                <!-- Expected Benefit -->
+                <div class="form-field" [class.field-error]="suggestBenefit.invalid && suggestBenefit.touched">
+                    <label for="s-benefit">Expected Benefit / Impact <span class="req">*</span></label>
+                    <textarea id="s-benefit" name="suggestBenefit" [(ngModel)]="suggestData.benefit"
+                        #suggestBenefit="ngModel" required rows="2"
+                        placeholder="e.g. Reduce manual effort by 60%, improve SLA compliance, faster hiring..."></textarea>
+                    @if (suggestBenefit.invalid && suggestBenefit.touched) {
+                    <span class="error-msg">This field is required</span>
+                    }
+                </div>
+
+                <!-- Row: Users & Tools -->
+                <div class="form-row two-col">
+                    <div class="form-field">
+                        <label for="s-users">Number of Potential Users</label>
+                        <input id="s-users" type="number" name="suggestUsers" [(ngModel)]="suggestData.users"
+                            min="1" placeholder="e.g. 50" />
+                    </div>
+                    <div class="form-field">
+                        <label for="s-tools">Existing Tools / Systems Involved</label>
+                        <input id="s-tools" type="text" name="suggestTools" [(ngModel)]="suggestData.tools"
+                            placeholder="e.g. SAP, Salesforce, MS Teams" />
+                    </div>
+                </div>
+
+                <!-- Additional Details -->
+                <div class="form-field">
+                    <label for="s-details">Additional Details</label>
+                    <textarea id="s-details" name="suggestDetails" [(ngModel)]="suggestData.details"
+                        rows="2" placeholder="Any other context, constraints, or references..."></textarea>
+                </div>
+
+                <!-- Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn-cancel" (click)="closeSuggestModal()">Cancel</button>
+                    <button type="submit" class="btn-submit" [disabled]="isSuggestSending">
+                        @if (isSuggestSending) {
+                        <span class="btn-spinner"></span>
+                        <span>Sending...</span>
+                        } @else {
+                        <span>Submit Suggestion</span>
+                        <span>→</span>
+                        }
+                    </button>
+                </div>
+
+                @if (suggestError) {
+                <div class="form-error-banner">
+                    ⚠ {{ suggestError }}
+                </div>
+                }
+
+            </form>
+
+        </div>
+    </div>
+    }
+
+
+    <!-- =====================================================
+       REQUEST AN AGENT MODAL
+       ===================================================== -->
+
+    @if (isRequestModalOpen) {
+    <div class="modal-overlay" (click)="closeRequestModal()" role="dialog" aria-modal="true"
+        aria-labelledby="request-modal-title">
+
+        <div class="modal-panel" (click)="$event.stopPropagation()">
+
+            <!-- Header -->
+            <div class="modal-header">
+                <div class="modal-header-left">
+                    <div class="modal-icon">◈</div>
+                    <div>
+                        <div class="modal-tag">AGENT REQUEST</div>
+                        <h2 id="request-modal-title">Request an Agent</h2>
+                    </div>
+                </div>
+                <button class="modal-close" type="button" (click)="closeRequestModal()" aria-label="Close modal">
+                    ✕
+                </button>
+            </div>
+
+            <p class="modal-subtitle">
+                Ready to deploy an AI agent? Fill in the details below and our team will get in touch to set it up for your team.
+            </p>
+
+            <!-- Form -->
+            <form class="modal-form" (ngSubmit)="submitRequestForm()" #requestForm="ngForm" novalidate>
+
+                <!-- Row: Name & Email -->
+                <div class="form-row two-col">
+                    <div class="form-field" [class.field-error]="reqName.invalid && reqName.touched">
+                        <label for="r-name">Full Name <span class="req">*</span></label>
+                        <input id="r-name" type="text" name="reqName" [(ngModel)]="requestData.name"
+                            #reqName="ngModel" required placeholder="e.g. John Smith" />
+                        @if (reqName.invalid && reqName.touched) {
+                        <span class="error-msg">Name is required</span>
+                        }
+                    </div>
+                    <div class="form-field" [class.field-error]="reqEmail.invalid && reqEmail.touched">
+                        <label for="r-email">Email Address <span class="req">*</span></label>
+                        <input id="r-email" type="email" name="reqEmail" [(ngModel)]="requestData.email"
+                            #reqEmail="ngModel" required email placeholder="you@company.com" />
+                        @if (reqEmail.invalid && reqEmail.touched) {
+                        <span class="error-msg">Valid email is required</span>
+                        }
+                    </div>
+                </div>
+
+                <!-- Department -->
+                <div class="form-field" [class.field-error]="reqDept.invalid && reqDept.touched">
+                    <label for="r-dept">Department / Business Unit <span class="req">*</span></label>
+                    <input id="r-dept" type="text" name="reqDept" [(ngModel)]="requestData.department"
+                        #reqDept="ngModel" required placeholder="e.g. HR, Finance, Operations" />
+                    @if (reqDept.invalid && reqDept.touched) {
+                    <span class="error-msg">Department is required</span>
+                    }
+                </div>
+
+                <!-- Select Agent -->
+                <div class="form-field" [class.field-error]="reqAgent.invalid && reqAgent.touched">
+                    <label for="r-agent">Select Agent <span class="req">*</span></label>
+                    <div class="select-wrapper">
+                        <select id="r-agent" name="reqAgent" [(ngModel)]="requestData.selectedAgent"
+                            #reqAgent="ngModel" required>
+                            <option value="" disabled>Choose an agent...</option>
+                            @for (agent of agents; track agent.name) {
+                            <option [value]="agent.name">{{ agent.name }}</option>
+                            }
+                        </select>
+                        <span class="select-arrow">▾</span>
+                    </div>
+                    @if (reqAgent.invalid && reqAgent.touched) {
+                    <span class="error-msg">Please select an agent</span>
+                    }
+                </div>
+
+                <!-- Purpose / Use Case -->
+                <div class="form-field" [class.field-error]="reqPurpose.invalid && reqPurpose.touched">
+                    <label for="r-purpose">Purpose / Use Case <span class="req">*</span></label>
+                    <textarea id="r-purpose" name="reqPurpose" [(ngModel)]="requestData.purpose"
+                        #reqPurpose="ngModel" required rows="3"
+                        placeholder="How will this agent be used in your team or workflow?"></textarea>
+                    @if (reqPurpose.invalid && reqPurpose.touched) {
+                    <span class="error-msg">This field is required</span>
+                    }
+                </div>
+
+                <!-- Row: Users & Benefit -->
+                <div class="form-row two-col">
+                    <div class="form-field" [class.field-error]="reqUsers.invalid && reqUsers.touched">
+                        <label for="r-users">Number of Users <span class="req">*</span></label>
+                        <input id="r-users" type="number" name="reqUsers" [(ngModel)]="requestData.users"
+                            #reqUsers="ngModel" required min="1" placeholder="e.g. 25" />
+                        @if (reqUsers.invalid && reqUsers.touched) {
+                        <span class="error-msg">User count is required</span>
+                        }
+                    </div>
+                    <div class="form-field" [class.field-error]="reqBenefit.invalid && reqBenefit.touched">
+                        <label for="r-benefit">Expected Business Benefit <span class="req">*</span></label>
+                        <input id="r-benefit" type="text" name="reqBenefit" [(ngModel)]="requestData.benefit"
+                            #reqBenefit="ngModel" required placeholder="e.g. Reduce turnaround by 40%" />
+                        @if (reqBenefit.invalid && reqBenefit.touched) {
+                        <span class="error-msg">This field is required</span>
+                        }
+                    </div>
+                </div>
+
+                <!-- Access / Deployment -->
+                <div class="form-field">
+                    <label for="r-access">Access / Deployment Requirement</label>
+                    <input id="r-access" type="text" name="reqAccess" [(ngModel)]="requestData.access"
+                        placeholder="e.g. Internal portal, MS Teams, API integration" />
+                </div>
+
+                <!-- Additional Comments -->
+                <div class="form-field">
+                    <label for="r-comments">Additional Comments</label>
+                    <textarea id="r-comments" name="reqComments" [(ngModel)]="requestData.comments"
+                        rows="2" placeholder="Anything else we should know?"></textarea>
+                </div>
+
+                <!-- Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn-cancel" (click)="closeRequestModal()">Cancel</button>
+                    <button type="submit" class="btn-submit" [disabled]="isRequestSending">
+                        @if (isRequestSending) {
+                        <span class="btn-spinner"></span>
+                        <span>Sending...</span>
+                        } @else {
+                        <span>Submit Request</span>
+                        <span>→</span>
+                        }
+                    </button>
+                </div>
+
+                @if (requestError) {
+                <div class="form-error-banner">
+                    ⚠ {{ requestError }}
+                </div>
+                }
+
+            </form>
+
+        </div>
+    </div>
+    }
+
+
+    <!-- =====================================================
+       TOAST NOTIFICATION
+       ===================================================== -->
+
+    @if (toastVisible) {
+    <div class="toast-notification" role="alert">
+        <span class="toast-icon">✓</span>
+        <span class="toast-text">{{ toastMessage }}</span>
+        <button type="button" class="toast-close" (click)="dismissToast()" aria-label="Dismiss">✕</button>
+    </div>
+    }
 
 </div>
