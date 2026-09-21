@@ -5,8 +5,8 @@
  * All puzzles are mathematically verified to be uniquely solvable
  * from the provided clues alone.
  *
- * Clue descriptions use plain English — not solely color — so the game
- * is accessible without relying on color meaning.
+ * Clues provide hints about digits and positions without revealing
+ * the actual secret code.
  */
 
 export interface CodePuzzle {
@@ -30,24 +30,24 @@ export const PUZZLES: CodePuzzle[] = [
     code: '3842',
     clues: [
       {
-        guess: '1234',
-        description: 'One digit is correct and in the right position'
-      },
-      {
-        guess: '5678',
-        description: 'One digit is correct but in the wrong position'
-      },
-      {
-        guess: '9012',
+        guess: '6157',
         description: 'Nothing is correct'
       },
       {
-        guess: '3569',
+        guess: '9801',
         description: 'One digit is correct and in the right position'
       },
       {
-        guess: '8742',
+        guess: '3940',
         description: 'Two digits are correct and in the right positions'
+      },
+      {
+        guess: '4283',
+        description: 'Four digits are correct but all in wrong positions'
+      },
+      {
+        guess: '3812',
+        description: 'Three digits are correct and in the right positions'
       }
     ]
   },
@@ -58,23 +58,23 @@ export const PUZZLES: CodePuzzle[] = [
     code: '7150',
     clues: [
       {
-        guess: '1234',
-        description: 'One digit is correct but in the wrong position'
+        guess: '2346',
+        description: 'Nothing is correct'
       },
       {
-        guess: '5678',
-        description: 'Two digits are correct but both in the wrong positions'
+        guess: '7892',
+        description: 'One digit is correct and in the right position'
       },
       {
-        guess: '9012',
-        description: 'One digit is correct but in the wrong position'
+        guess: '0517',
+        description: 'Four digits are correct but all in wrong positions'
       },
       {
-        guess: '7890',
-        description: 'Two digits are correct — one in the right position, one in the wrong position'
+        guess: '7198',
+        description: 'Two digits are correct and in the right positions'
       },
       {
-        guess: '7153',
+        guess: '7159',
         description: 'Three digits are correct and in the right positions'
       }
     ]
@@ -86,23 +86,23 @@ export const PUZZLES: CodePuzzle[] = [
     code: '2693',
     clues: [
       {
-        guess: '1234',
-        description: 'Two digits are correct but both in the wrong positions'
+        guess: '1457',
+        description: 'Nothing is correct'
       },
       {
-        guess: '5678',
-        description: 'One digit is correct but in the wrong position'
+        guess: '3962',
+        description: 'Four digits are correct but all in wrong positions'
       },
       {
-        guess: '9012',
-        description: 'One digit is correct but in the wrong position'
+        guess: '2083',
+        description: 'Two digits are correct and in the right positions'
       },
       {
-        guess: '2758',
-        description: 'One digit is correct and in the right position'
+        guess: '2608',
+        description: 'Two digits are correct and in the right positions'
       },
       {
-        guess: '2694',
+        guess: '2690',
         description: 'Three digits are correct and in the right positions'
       }
     ]
@@ -114,24 +114,24 @@ export const PUZZLES: CodePuzzle[] = [
     code: '5074',
     clues: [
       {
-        guess: '1234',
-        description: 'One digit is correct and in the right position'
+        guess: '1236',
+        description: 'Nothing is correct'
       },
       {
-        guess: '5678',
-        description: 'One digit is correct and in the right position'
+        guess: '4705',
+        description: 'Four digits are correct but all in wrong positions'
       },
       {
-        guess: '9012',
-        description: 'One digit is correct but in the wrong position'
-      },
-      {
-        guess: '5038',
+        guess: '5089',
         description: 'Two digits are correct and in the right positions'
       },
       {
-        guess: '4075',
-        description: 'Two digits are correct but both in the wrong positions'
+        guess: '5078',
+        description: 'Three digits are correct and in the right positions'
+      },
+      {
+        guess: '9074',
+        description: 'Three digits are correct and in the right positions'
       }
     ]
   },
@@ -142,24 +142,24 @@ export const PUZZLES: CodePuzzle[] = [
     code: '9416',
     clues: [
       {
-        guess: '1234',
-        description: 'One digit is correct but in the wrong position'
+        guess: '2357',
+        description: 'Nothing is correct'
       },
       {
-        guess: '5678',
-        description: 'One digit is correct but in the wrong position'
+        guess: '6149',
+        description: 'Four digits are correct but all in wrong positions'
       },
       {
-        guess: '9012',
-        description: 'One digit is correct and in the right position'
+        guess: '9408',
+        description: 'Two digits are correct and in the right positions'
       },
       {
-        guess: '4916',
-        description: 'Two digits are correct and in the right positions, two in the wrong positions'
+        guess: '9410',
+        description: 'Three digits are correct and in the right positions'
       },
       {
-        guess: '9416',
-        description: 'That\'s the code — ACCESS GRANTED!'
+        guess: '0416',
+        description: 'Three digits are correct and in the right positions'
       }
     ]
   },
@@ -170,24 +170,24 @@ export const PUZZLES: CodePuzzle[] = [
     code: '6381',
     clues: [
       {
-        guess: '1234',
-        description: 'One digit is correct but in the wrong position'
+        guess: '0245',
+        description: 'Nothing is correct'
       },
       {
-        guess: '5678',
-        description: 'One digit is correct but in the wrong position'
+        guess: '1836',
+        description: 'Four digits are correct but all in wrong positions'
       },
       {
-        guess: '9018',
-        description: 'One digit is correct and in the right position'
+        guess: '6379',
+        description: 'Two digits are correct and in the right positions'
       },
       {
-        guess: '6572',
-        description: 'One digit is correct and in the right position'
+        guess: '6380',
+        description: 'Three digits are correct and in the right positions'
       },
       {
-        guess: '6381',
-        description: 'That\'s the code — ACCESS GRANTED!'
+        guess: '0381',
+        description: 'Three digits are correct and in the right positions'
       }
     ]
   },
@@ -198,23 +198,23 @@ export const PUZZLES: CodePuzzle[] = [
     code: '0528',
     clues: [
       {
-        guess: '1234',
-        description: 'One digit is correct but in the wrong position'
+        guess: '1347',
+        description: 'Nothing is correct'
       },
       {
-        guess: '5678',
-        description: 'Two digits are correct but both in the wrong positions'
+        guess: '8250',
+        description: 'Four digits are correct but all in wrong positions'
       },
       {
-        guess: '9012',
-        description: 'One digit is correct but in the wrong position'
+        guess: '0569',
+        description: 'Two digits are correct and in the right positions'
       },
       {
-        guess: '0349',
-        description: 'One digit is correct and in the right position'
+        guess: '0529',
+        description: 'Three digits are correct and in the right positions'
       },
       {
-        guess: '0527',
+        guess: '9528',
         description: 'Three digits are correct and in the right positions'
       }
     ]
@@ -226,24 +226,24 @@ export const PUZZLES: CodePuzzle[] = [
     code: '4709',
     clues: [
       {
-        guess: '1234',
-        description: 'One digit is correct but in the wrong position'
+        guess: '1235',
+        description: 'Nothing is correct'
       },
       {
-        guess: '5678',
-        description: 'One digit is correct but in the wrong position'
+        guess: '9074',
+        description: 'Four digits are correct but all in wrong positions'
       },
       {
-        guess: '4012',
-        description: 'One digit is correct and in the right position'
+        guess: '4786',
+        description: 'Two digits are correct and in the right positions'
       },
       {
-        guess: '3790',
-        description: 'Two digits are correct but both in the wrong positions'
+        guess: '4706',
+        description: 'Three digits are correct and in the right positions'
       },
       {
-        guess: '4769',
-        description: 'Three digits are correct — two in right positions, one in wrong position'
+        guess: '8709',
+        description: 'Three digits are correct and in the right positions'
       }
     ]
   }
